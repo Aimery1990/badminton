@@ -1,0 +1,3954 @@
+/Users/aimery/repos/machine_learning/machine_learning/venv/bin/python /Users/aimery/repos/machine_learning/machine_learning/assignment4/MLP_training.py
+/Users/aimery/repos/machine_learning/machine_learning/venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Processing configurations for: clear
+
+=======================================================
+| STARTING PIPELINE for Shot Type: clear |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: clear
+Loaded: ./new_10_kyle/clear_10_kyle.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-11-05  13:16:11.041     -0.08376  ...   -0.48505     0.2121            4.0
+1  2025-11-05  13:16:11.140     -0.07773  ...   -0.48527     0.2121          104.0
+2  2025-11-05  13:16:11.240     -0.09025  ...   -0.48581     0.2121          204.0
+3  2025-11-05  13:16:11.341     -0.08967  ...   -0.48550     0.2121          304.0
+4  2025-11-05  13:16:11.441     -0.07949  ...   -0.48480     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 238 entries, 2025-11-05 13:16:11.041000 to 2025-11-05 13:16:34.740000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           238 non-null    object
+ 1   Time           238 non-null    object
+ 2   Accel_X (g)    238 non-null    float64
+ 3   Accel_Y (g)    238 non-null    float64
+ 4   Accel_Z (g)    238 non-null    float64
+ 5   Gyro_X (°/s)   238 non-null    float64
+ 6   Gyro_Y (°/s)   238 non-null    float64
+ 7   Gyro_Z (°/s)   238 non-null    float64
+ 8   Mag_X (G)      238 non-null    float64
+ 9   Mag_Y (G)      238 non-null    float64
+ 10  Mag_Z (G)      238 non-null    float64
+ 11  Timestamp (s)  238 non-null    float64
+ 12  shot_type      238 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 26.0+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:16:11.100  2025-11-05  13:16:11.041  ...            4.0      clear
+2025-11-05 13:16:11.200  2025-11-05  13:16:11.140  ...          104.0      clear
+2025-11-05 13:16:11.300  2025-11-05  13:16:11.240  ...          204.0      clear
+2025-11-05 13:16:11.400  2025-11-05  13:16:11.341  ...          304.0      clear
+2025-11-05 13:16:11.500  2025-11-05  13:16:11.441  ...          404.0      clear
+
+[5 rows x 13 columns]
+0.0013933333333333304
+0.09437160690648959
+0.21209999999999996
+5.562863528062607e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 237 entries, 2025-11-05 13:16:11.100000 to 2025-11-05 13:16:34.700000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           237 non-null    object
+ 1   Time           237 non-null    object
+ 2   Accel_X (g)    237 non-null    float64
+ 3   Accel_Y (g)    237 non-null    float64
+ 4   Accel_Z (g)    237 non-null    float64
+ 5   Gyro_X (°/s)   237 non-null    float64
+ 6   Gyro_Y (°/s)   237 non-null    float64
+ 7   Gyro_Z (°/s)   237 non-null    float64
+ 8   Mag_X (G)      237 non-null    float64
+ 9   Mag_Y (G)      237 non-null    float64
+ 10  Mag_Z (G)      237 non-null    float64
+ 11  Timestamp (s)  237 non-null    float64
+ 12  shot_type      237 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 25.9+ KB
+column: Accel_X (g) mean: -0.004649156118143461 subtracted
+column: Accel_Y (g) mean: -0.142180970464135 subtracted
+column: Accel_Z (g) mean: -0.5104267510548522 subtracted
+column: Gyro_X (°/s) mean: -9.597619873417722 subtracted
+column: Gyro_Y (°/s) mean: -26.672198101265824 subtracted
+column: Gyro_Z (°/s) mean: -27.1429146835443 subtracted
+column: Mag_X (G) mean: 0.0013933333333333304 subtracted
+column: Mag_Y (G) mean: -0.3570805485232067 subtracted
+column: Mag_Z (G) mean: 0.21209999999999996 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:16:11.100  2025-11-05  13:16:11.041  ...            4.0      clear
+2025-11-05 13:16:11.200  2025-11-05  13:16:11.140  ...          104.0      clear
+2025-11-05 13:16:11.300  2025-11-05  13:16:11.240  ...          204.0      clear
+2025-11-05 13:16:11.400  2025-11-05  13:16:11.341  ...          304.0      clear
+2025-11-05 13:16:11.500  2025-11-05  13:16:11.441  ...          404.0      clear
+
+[5 rows x 13 columns]
+3.7475882687768994e-18
+0.09437160690648959
+5.551115123125783e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 237 entries, 2025-11-05 13:16:11.100000 to 2025-11-05 13:16:34.700000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           237 non-null    object
+ 1   Time           237 non-null    object
+ 2   Accel_X (g)    237 non-null    float64
+ 3   Accel_Y (g)    237 non-null    float64
+ 4   Accel_Z (g)    237 non-null    float64
+ 5   Gyro_X (°/s)   237 non-null    float64
+ 6   Gyro_Y (°/s)   237 non-null    float64
+ 7   Gyro_Z (°/s)   237 non-null    float64
+ 8   Mag_X (G)      237 non-null    float64
+ 9   Mag_Y (G)      237 non-null    float64
+ 10  Mag_Z (G)      237 non-null    float64
+ 11  Timestamp (s)  237 non-null    float64
+ 12  shot_type      237 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 25.9+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:16:11.100  2025-11-05  13:16:11.041  ...            4.0      clear
+2025-11-05 13:16:11.200  2025-11-05  13:16:11.140  ...          104.0      clear
+2025-11-05 13:16:11.300  2025-11-05  13:16:11.240  ...          204.0      clear
+2025-11-05 13:16:11.400  2025-11-05  13:16:11.341  ...          304.0      clear
+2025-11-05 13:16:11.500  2025-11-05  13:16:11.441  ...          404.0      clear
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 237 entries, 2025-11-05 13:16:11.100000 to 2025-11-05 13:16:34.700000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           237 non-null    object
+ 1   Time           237 non-null    object
+ 2   Accel_X (g)    237 non-null    float64
+ 3   Accel_Y (g)    237 non-null    float64
+ 4   Accel_Z (g)    237 non-null    float64
+ 5   Gyro_X (°/s)   237 non-null    float64
+ 6   Gyro_Y (°/s)   237 non-null    float64
+ 7   Gyro_Z (°/s)   237 non-null    float64
+ 8   Mag_X (G)      237 non-null    float64
+ 9   Mag_Y (G)      237 non-null    float64
+ 10  Mag_Z (G)      237 non-null    float64
+ 11  Timestamp (s)  237 non-null    float64
+ 12  shot_type      237 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 25.9+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (189, 12)
+Shape of X_test: (48, 12)
+Shape of y_train: (189,)
+Shape of y_test: (48,)
+Creating windows for training set (Total Timesteps: 189).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 17 windows for the training set.
+Creating windows for validating set (Total Timesteps: 48).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 3 windows for the validating set.
+
+--- 4. Data Augmentation ---
+--- Starting Data Augmentation (Time Domain) ---
+Original Training Windows Shape: (17, 20, 9)
+[TimeDomainAug] Input shape: (17, 20, 9), Generating 3 augmented copies.
+--- Augmentation Pass #1 ---
+--- Augmentation Pass #2 ---
+--- Augmentation Pass #3 ---
+[TimeDomainAug] Output shape: X=(68, 20, 9), Y=(68,)
+--- Data Augmentation Complete ---
+NEW Total Training Windows Shape: (68, 20, 9)
+
+--- 5. Feature Extraction ---
+Feature extraction complete for training set. Final Feature DataFrame Shape: (68, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -0.029763         0.246244  ...      0.151685      clear
+1         -0.018309         0.265067  ...      0.110518      clear
+2         -0.026106         0.189301  ...      0.216915      clear
+3         -0.061874         0.158451  ...      0.461661      clear
+4         -0.025342         0.191204  ...      0.519642      clear
+
+[5 rows x 97 columns]
+Feature extraction complete for validating set. Final Feature DataFrame Shape: (3, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -0.021804         0.236700  ...      0.449646      clear
+1          0.032401         0.249964  ...      0.583560      clear
+2          0.041896         0.275438  ...      0.760367      clear
+
+[3 rows x 97 columns]
+
+--- 6. Feature Normalization ---
+StandardScaler fitted successfully on training data.
+Mean (per feature): [-2.03275933e-03  2.24601468e-01  1.07361283e-01 -4.24868151e-01
+  4.92388777e-01  9.17256928e-01  2.22225075e-01 -5.98951322e-02
+  1.62103326e+00  1.94300458e-01 -1.32500621e+00  4.67942189e+00
+  6.00442810e+00  8.59459840e-01 -4.86009715e-04  8.27945120e-01
+  3.44204664e-01 -2.01195832e+00  1.64567824e+00  3.65763655e+00
+  7.02918654e-01  2.92355698e-01  2.13396527e+02  3.69516537e+01
+ -4.45317033e+02  5.20210245e+02  9.65527279e+02  7.72188114e+01
+ -3.48917635e-01  4.49561258e+01  1.97636617e+01 -1.14917020e+02
+  6.90726228e+01  1.83989643e+02  4.57541076e+01  1.09897043e+00
+  8.71694653e+01  1.99780262e+01 -2.59579564e+02  1.28344140e+02
+  3.87923704e+02  4.54128803e+01 -3.32124877e-03  8.62673380e-02
+  4.93952510e-02 -1.14951257e-01  1.96308094e-01  3.11259351e-01
+  1.13025115e-01 -2.29659688e-03  1.65914029e-01  6.93714752e-02
+ -1.51567092e-01  4.88657431e-01  6.40224524e-01  1.54085457e-01
+  2.87690983e-04  7.21804840e-03  4.95234108e-03 -1.39476108e-02
+  1.39599878e-02  2.79075986e-02  9.67074045e-03  1.50039894e+00
+  1.16773631e+00  1.59145074e+02  1.84837178e+02  1.56379678e-01
+  1.13207098e-01  5.95588235e+00  2.54751994e+00  5.00866887e+00
+  6.33823529e+00  3.13634041e+02  6.29395088e+02 -4.21546633e-04
+  3.30138092e-01  2.48670515e-02  2.34278634e+00 -5.06356960e-03
+  1.20823990e+00  2.52941176e+00  8.89570003e+00  6.21268662e+01
+  1.60837951e+02  2.67647059e+00  1.44946267e+03  1.43317887e+06
+  3.82375056e+06  1.06864962e+02  2.84141886e-01  2.14748818e-01
+  7.48521052e-02 -2.16738943e-01 -7.84802906e-01  2.42395889e-01]
+Std Dev (per feature): [4.77916982e-02 5.46677234e-02 4.57097107e-02 1.22972898e-01
+ 1.66671641e-01 2.25332571e-01 9.68938342e-02 3.98905566e-01
+ 5.07848646e-01 6.60348152e-02 2.28922748e-01 1.37172170e+00
+ 1.33943032e+00 9.08048692e-01 1.42845920e-01 1.98810595e-01
+ 8.63308133e-02 7.22481541e-01 6.46473003e-01 9.98252269e-01
+ 2.29388702e-01 5.66155328e+01 4.48473835e+01 1.81980184e+01
+ 2.00022389e+02 1.30980969e+02 2.30822328e+02 3.30686055e+01
+ 9.37524213e+00 7.47070670e+00 6.08561064e+00 3.09953366e+01
+ 2.96335538e+01 3.78517945e+01 1.48154422e+01 2.10374128e+01
+ 2.07385923e+01 6.56392618e+00 7.93398460e+01 4.54023418e+01
+ 7.62986572e+01 1.56789702e+01 2.17654940e-02 1.66011946e-02
+ 1.94811071e-02 1.66858506e-02 4.65862789e-02 5.07681711e-02
+ 4.68705917e-02 3.82698222e-02 4.67709905e-02 2.39304686e-02
+ 1.43977852e-02 1.42644168e-01 1.46044923e-01 5.38229155e-02
+ 1.61216928e-03 4.44403595e-03 3.21839843e-03 9.35377637e-03
+ 9.23282137e-03 1.74925955e-02 6.20088251e-03 2.93729244e-01
+ 3.85274880e-01 2.99756510e+01 3.16474397e+01 2.89164270e-02
+ 3.68128541e-02 9.14488342e-01 7.15015906e-01 1.27443414e+00
+ 1.05175336e+00 6.48933841e+01 8.48097648e+01 1.70681565e-02
+ 8.74625047e-02 9.36343348e-02 7.25618530e-01 4.51990214e-02
+ 3.09726217e-01 1.44985383e+00 3.22544963e+00 4.64264610e+01
+ 1.07202403e+02 1.24783550e+00 2.99956838e+02 9.10510776e+05
+ 1.36272027e+06 5.94027402e+01 3.84333816e-01 2.63993099e-01
+ 4.28673518e-01 3.07256139e-01 1.11873418e-01 2.46180180e-01]
+
+Feature Normalization Complete.
+Scaled Training Features Shape: (68, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -0.580240         0.395894  ...     -0.368475      clear
+1         -0.340576         0.740204  ...     -0.535695      clear
+2         -0.503701        -0.645724  ...     -0.103506      clear
+3         -1.252135        -1.210051  ...      0.890670      clear
+4         -0.487717        -0.610925  ...      1.126192      clear
+
+[5 rows x 97 columns]
+
+--- 7. Dumping Final CSV ---
+✅ Successfully exported SCALED training features to: ./combined_final_features/A4_features_clear.csv
+✅ Successfully exported SCALED testing features to: ./combined_final_features/A4_validation_clear.csv
+| Pipeline for clear finished. Files saved to './combined_final_features'. |
+=======================================================
+Processing configurations for: drive
+
+=======================================================
+| STARTING PIPELINE for Shot Type: drive |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: drive
+Loaded: ./new_10_kyle/drive_10_kyle.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-11-05  13:16:48.776      0.04947  ...   -0.44213     0.2121            4.0
+1  2025-11-05  13:16:48.876      0.04615  ...   -0.44215     0.2121          104.0
+2  2025-11-05  13:16:48.976      0.04369  ...   -0.44213     0.2121          204.0
+3  2025-11-05  13:16:49.076      0.05651  ...   -0.44191     0.2121          304.0
+4  2025-11-05  13:16:49.176      0.07358  ...   -0.44188     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 229 entries, 2025-11-05 13:16:48.776000 to 2025-11-05 13:17:11.580000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           229 non-null    object
+ 1   Time           229 non-null    object
+ 2   Accel_X (g)    229 non-null    float64
+ 3   Accel_Y (g)    229 non-null    float64
+ 4   Accel_Z (g)    229 non-null    float64
+ 5   Gyro_X (°/s)   229 non-null    float64
+ 6   Gyro_Y (°/s)   229 non-null    float64
+ 7   Gyro_Z (°/s)   229 non-null    float64
+ 8   Mag_X (G)      229 non-null    float64
+ 9   Mag_Y (G)      229 non-null    float64
+ 10  Mag_Z (G)      229 non-null    float64
+ 11  Timestamp (s)  229 non-null    float64
+ 12  shot_type      229 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 25.0+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:16:48.800  2025-11-05  13:16:48.776  ...            4.0      drive
+2025-11-05 13:16:48.900  2025-11-05  13:16:48.876  ...          104.0      drive
+2025-11-05 13:16:49.000  2025-11-05  13:16:48.976  ...          204.0      drive
+2025-11-05 13:16:49.100  2025-11-05  13:16:49.076  ...          304.0      drive
+2025-11-05 13:16:49.200  2025-11-05  13:16:49.176  ...          404.0      drive
+
+[5 rows x 13 columns]
+-0.006436096491228071
+0.08576360643968577
+0.21209999999999998
+2.7816644062647093e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 228 entries, 2025-11-05 13:16:48.800000 to 2025-11-05 13:17:11.500000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           228 non-null    object
+ 1   Time           228 non-null    object
+ 2   Accel_X (g)    228 non-null    float64
+ 3   Accel_Y (g)    228 non-null    float64
+ 4   Accel_Z (g)    228 non-null    float64
+ 5   Gyro_X (°/s)   228 non-null    float64
+ 6   Gyro_Y (°/s)   228 non-null    float64
+ 7   Gyro_Z (°/s)   228 non-null    float64
+ 8   Mag_X (G)      228 non-null    float64
+ 9   Mag_Y (G)      228 non-null    float64
+ 10  Mag_Z (G)      228 non-null    float64
+ 11  Timestamp (s)  228 non-null    float64
+ 12  shot_type      228 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 24.9+ KB
+column: Accel_X (g) mean: -0.03938934210526317 subtracted
+column: Accel_Y (g) mean: -0.7012449122807018 subtracted
+column: Accel_Z (g) mean: -0.3091499122807017 subtracted
+column: Gyro_X (°/s) mean: -3.14636298245614 subtracted
+column: Gyro_Y (°/s) mean: -1.91943451754386 subtracted
+column: Gyro_Z (°/s) mean: -7.85054153508772 subtracted
+column: Mag_X (G) mean: -0.006436096491228071 subtracted
+column: Mag_Y (G) mean: -0.4198540350877193 subtracted
+column: Mag_Z (G) mean: 0.21209999999999998 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:16:48.800  2025-11-05  13:16:48.776  ...            4.0      drive
+2025-11-05 13:16:48.900  2025-11-05  13:16:48.876  ...          104.0      drive
+2025-11-05 13:16:49.000  2025-11-05  13:16:48.976  ...          204.0      drive
+2025-11-05 13:16:49.100  2025-11-05  13:16:49.076  ...          304.0      drive
+2025-11-05 13:16:49.200  2025-11-05  13:16:49.176  ...          404.0      drive
+
+[5 rows x 13 columns]
+-1.947759692324836e-18
+0.08576360643968577
+2.7755575615628914e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 228 entries, 2025-11-05 13:16:48.800000 to 2025-11-05 13:17:11.500000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           228 non-null    object
+ 1   Time           228 non-null    object
+ 2   Accel_X (g)    228 non-null    float64
+ 3   Accel_Y (g)    228 non-null    float64
+ 4   Accel_Z (g)    228 non-null    float64
+ 5   Gyro_X (°/s)   228 non-null    float64
+ 6   Gyro_Y (°/s)   228 non-null    float64
+ 7   Gyro_Z (°/s)   228 non-null    float64
+ 8   Mag_X (G)      228 non-null    float64
+ 9   Mag_Y (G)      228 non-null    float64
+ 10  Mag_Z (G)      228 non-null    float64
+ 11  Timestamp (s)  228 non-null    float64
+ 12  shot_type      228 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 24.9+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:16:48.800  2025-11-05  13:16:48.776  ...            4.0      drive
+2025-11-05 13:16:48.900  2025-11-05  13:16:48.876  ...          104.0      drive
+2025-11-05 13:16:49.000  2025-11-05  13:16:48.976  ...          204.0      drive
+2025-11-05 13:16:49.100  2025-11-05  13:16:49.076  ...          304.0      drive
+2025-11-05 13:16:49.200  2025-11-05  13:16:49.176  ...          404.0      drive
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 228 entries, 2025-11-05 13:16:48.800000 to 2025-11-05 13:17:11.500000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           228 non-null    object
+ 1   Time           228 non-null    object
+ 2   Accel_X (g)    228 non-null    float64
+ 3   Accel_Y (g)    228 non-null    float64
+ 4   Accel_Z (g)    228 non-null    float64
+ 5   Gyro_X (°/s)   228 non-null    float64
+ 6   Gyro_Y (°/s)   228 non-null    float64
+ 7   Gyro_Z (°/s)   228 non-null    float64
+ 8   Mag_X (G)      228 non-null    float64
+ 9   Mag_Y (G)      228 non-null    float64
+ 10  Mag_Z (G)      228 non-null    float64
+ 11  Timestamp (s)  228 non-null    float64
+ 12  shot_type      228 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 24.9+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (182, 12)
+Shape of X_test: (46, 12)
+Shape of y_train: (182,)
+Shape of y_test: (46,)
+Creating windows for training set (Total Timesteps: 182).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 17 windows for the training set.
+Creating windows for validating set (Total Timesteps: 46).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 3 windows for the validating set.
+
+--- 4. Data Augmentation ---
+--- Starting Data Augmentation (Time Domain) ---
+Original Training Windows Shape: (17, 20, 9)
+[TimeDomainAug] Input shape: (17, 20, 9), Generating 3 augmented copies.
+--- Augmentation Pass #1 ---
+--- Augmentation Pass #2 ---
+--- Augmentation Pass #3 ---
+[TimeDomainAug] Output shape: X=(68, 20, 9), Y=(68,)
+--- Data Augmentation Complete ---
+NEW Total Training Windows Shape: (68, 20, 9)
+
+--- 5. Feature Extraction ---
+Feature extraction complete for training set. Final Feature DataFrame Shape: (68, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -0.003372         0.219953  ...      0.066881      drive
+1          0.082374         0.227778  ...     -0.336533      drive
+2          0.090997         0.163490  ...     -0.309206      drive
+3          0.034185         0.164875  ...      0.026858      drive
+4          0.009542         0.170440  ...      0.040403      drive
+
+[5 rows x 97 columns]
+Feature extraction complete for validating set. Final Feature DataFrame Shape: (3, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -0.016099         0.170072  ...     -0.211463      drive
+1         -0.020871         0.225378  ...     -0.445832      drive
+2         -0.082297         0.225173  ...     -0.395437      drive
+
+[3 rows x 97 columns]
+
+--- 6. Feature Normalization ---
+StandardScaler fitted successfully on training data.
+Mean (per feature): [ 1.46888720e-02  2.03887947e-01  1.14845022e-01 -3.39599081e-01
+  5.11461930e-01  8.51061012e-01  2.15076759e-01  3.94884806e-02
+  8.59248431e-01  5.79027062e-02 -6.97217904e-01  2.58892776e+00
+  3.28614566e+00  2.34851357e-01  2.66115169e-02  4.65397864e-01
+  1.00760732e-01 -1.00264991e+00  1.30679735e+00  2.30944727e+00
+  1.94855384e-01 -3.27045833e+00  1.14046976e+02  2.78701820e+01
+ -2.49580818e+02  2.75724927e+02  5.25305745e+02  5.87907528e+01
+  1.09187590e+00  3.58982033e+01  1.37936558e+01 -6.25652385e+01
+  9.56941266e+01  1.58259365e+02  2.77342800e+01  1.74443615e+00
+  5.77682289e+01  1.26150727e+01 -1.52556578e+02  1.02975689e+02
+  2.55532267e+02  2.32813687e+01  8.13139504e-03  8.28864931e-02
+  5.71058081e-02 -1.28082177e-01  1.80400931e-01  3.08483108e-01
+  1.10337785e-01  1.42809248e-03  4.63819765e-02  2.12739848e-02
+ -5.49908245e-02  1.25321597e-01  1.80312421e-01  4.63248806e-02
+ -7.36428674e-05  7.49296655e-03  4.98951266e-03 -1.42313475e-02
+  1.49046469e-02  2.91359944e-02  9.59309055e-03  7.18532112e-01
+  7.32940792e-01  9.08662335e+01  1.01467532e+02  8.28403234e-02
+  5.04016069e-02  6.35294118e+00  1.35976059e+00  2.84303277e+00
+  6.35294118e+00  1.79204916e+02  3.46414832e+02 -2.16139006e-03
+  3.00678740e-01 -1.81217783e-02  1.31160704e+00 -5.40892551e-03
+  6.78733651e-01  3.58823529e+00  5.86066025e+00  1.53624962e+01
+  6.45949137e+01  3.26470588e+00  7.82742978e+02  4.48409003e+05
+  1.03779919e+06  4.56029187e+01  4.30960674e-01  6.35431361e-01
+  2.87081809e-01 -2.59234182e-01 -7.88055052e-01 -2.63664193e-02]
+Std Dev (per feature): [4.69848516e-02 5.46321587e-02 2.49082206e-02 8.49721107e-02
+ 2.35535188e-01 2.42435479e-01 3.99475022e-02 1.59929947e-01
+ 2.03121095e-01 2.15995439e-02 1.00899648e-01 5.69669613e-01
+ 5.92210535e-01 3.71399941e-01 8.32142753e-02 1.65957881e-01
+ 3.99300335e-02 4.11541006e-01 6.52731543e-01 8.94526154e-01
+ 7.13648997e-02 2.22733913e+01 3.29771769e+01 2.19485491e+01
+ 5.03400267e+01 1.07312877e+02 1.32311248e+02 2.93042762e+01
+ 6.62396989e+00 8.14652321e+00 5.62261607e+00 1.27448737e+01
+ 3.00994218e+01 3.37167174e+01 1.01783798e+01 1.10456115e+01
+ 2.26103287e+01 9.13077249e+00 7.18512208e+01 3.32916557e+01
+ 8.80016772e+01 1.53777542e+01 1.21885763e-02 1.02693259e-02
+ 9.78601971e-03 2.09927579e-02 3.01634249e-02 3.49634388e-02
+ 1.97832589e-02 1.01038026e-02 7.07481697e-03 1.05401833e-02
+ 9.36017980e-03 2.69510162e-02 2.81488243e-02 1.88847916e-02
+ 1.96777758e-03 4.50236369e-03 3.16013580e-03 9.28092769e-03
+ 9.95319664e-03 1.81309147e-02 6.05198139e-03 1.41782682e-01
+ 1.78489019e-01 2.27791485e+01 3.00556923e+01 9.41660020e-03
+ 9.19552603e-03 8.87241361e-01 3.25738270e-01 4.89466609e-01
+ 1.02562328e+00 6.34117037e+01 8.67188885e+01 1.59895617e-02
+ 9.08622681e-02 4.76897930e-02 3.14925514e-01 3.76469807e-02
+ 2.66560462e-01 1.35294118e+00 1.78042512e+00 9.38779876e+00
+ 3.54851705e+01 1.41543640e+00 2.29707902e+02 3.18762094e+05
+ 6.05841021e+05 2.50608117e+01 3.72469681e-01 1.76305315e-01
+ 3.05244715e-01 3.66260735e-01 1.95349415e-01 3.17850963e-01]
+
+Feature Normalization Complete.
+Scaled Training Features Shape: (68, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -0.384402         0.294067  ...      0.293368      drive
+1          1.440569         0.437282  ...     -0.975825      drive
+2          1.624108        -0.739448  ...     -0.889849      drive
+3          0.414948        -0.714097  ...      0.167452      drive
+4         -0.109534        -0.612246  ...      0.210067      drive
+
+[5 rows x 97 columns]
+
+--- 7. Dumping Final CSV ---
+✅ Successfully exported SCALED training features to: ./combined_final_features/A4_features_drive.csv
+✅ Successfully exported SCALED testing features to: ./combined_final_features/A4_validation_drive.csv
+| Pipeline for drive finished. Files saved to './combined_final_features'. |
+=======================================================
+Processing configurations for: lift
+
+=======================================================
+| STARTING PIPELINE for Shot Type: lift |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: lift
+Loaded: ./new_10_kyle/lift_10_kyle.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-11-05  13:14:07.164      0.12209  ...   -0.42420     0.2121            4.0
+1  2025-11-05  13:14:07.265      0.12451  ...   -0.42395     0.2121          104.0
+2  2025-11-05  13:14:07.365      0.13949  ...   -0.42397     0.2121          204.0
+3  2025-11-05  13:14:07.465      0.13790  ...   -0.42420     0.2121          304.0
+4  2025-11-05  13:14:07.565      0.13286  ...   -0.42397     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 313 entries, 2025-11-05 13:14:07.164000 to 2025-11-05 13:14:38.365000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           313 non-null    object
+ 1   Time           313 non-null    object
+ 2   Accel_X (g)    313 non-null    float64
+ 3   Accel_Y (g)    313 non-null    float64
+ 4   Accel_Z (g)    313 non-null    float64
+ 5   Gyro_X (°/s)   313 non-null    float64
+ 6   Gyro_Y (°/s)   313 non-null    float64
+ 7   Gyro_Z (°/s)   313 non-null    float64
+ 8   Mag_X (G)      313 non-null    float64
+ 9   Mag_Y (G)      313 non-null    float64
+ 10  Mag_Z (G)      313 non-null    float64
+ 11  Timestamp (s)  313 non-null    float64
+ 12  shot_type      313 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 34.2+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:14:07.200  2025-11-05  13:14:07.164  ...            4.0       lift
+2025-11-05 13:14:07.300  2025-11-05  13:14:07.265  ...          104.0       lift
+2025-11-05 13:14:07.400  2025-11-05  13:14:07.365  ...          204.0       lift
+2025-11-05 13:14:07.500  2025-11-05  13:14:07.465  ...          304.0       lift
+2025-11-05 13:14:07.600  2025-11-05  13:14:07.565  ...          404.0       lift
+
+[5 rows x 13 columns]
+0.05271791666666667
+0.12630481061460702
+0.21209999999999996
+5.56003258288733e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 312 entries, 2025-11-05 13:14:07.200000 to 2025-11-05 13:14:38.300000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           312 non-null    object
+ 1   Time           312 non-null    object
+ 2   Accel_X (g)    312 non-null    float64
+ 3   Accel_Y (g)    312 non-null    float64
+ 4   Accel_Z (g)    312 non-null    float64
+ 5   Gyro_X (°/s)   312 non-null    float64
+ 6   Gyro_Y (°/s)   312 non-null    float64
+ 7   Gyro_Z (°/s)   312 non-null    float64
+ 8   Mag_X (G)      312 non-null    float64
+ 9   Mag_Y (G)      312 non-null    float64
+ 10  Mag_Z (G)      312 non-null    float64
+ 11  Timestamp (s)  312 non-null    float64
+ 12  shot_type      312 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 34.1+ KB
+column: Accel_X (g) mean: 0.4516026602564102 subtracted
+column: Accel_Y (g) mean: 0.18523903846153847 subtracted
+column: Accel_Z (g) mean: -0.13264907051282052 subtracted
+column: Gyro_X (°/s) mean: 12.561055769230768 subtracted
+column: Gyro_Y (°/s) mean: 28.73210189102564 subtracted
+column: Gyro_Z (°/s) mean: -59.31369464743591 subtracted
+column: Mag_X (G) mean: 0.05271791666666667 subtracted
+column: Mag_Y (G) mean: -0.2464851923076923 subtracted
+column: Mag_Z (G) mean: 0.21209999999999996 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:14:07.200  2025-11-05  13:14:07.164  ...            4.0       lift
+2025-11-05 13:14:07.300  2025-11-05  13:14:07.265  ...          104.0       lift
+2025-11-05 13:14:07.400  2025-11-05  13:14:07.365  ...          204.0       lift
+2025-11-05 13:14:07.500  2025-11-05  13:14:07.465  ...          304.0       lift
+2025-11-05 13:14:07.600  2025-11-05  13:14:07.565  ...          404.0       lift
+
+[5 rows x 13 columns]
+-5.337610695313253e-18
+0.12630481061460702
+5.551115123125783e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 312 entries, 2025-11-05 13:14:07.200000 to 2025-11-05 13:14:38.300000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           312 non-null    object
+ 1   Time           312 non-null    object
+ 2   Accel_X (g)    312 non-null    float64
+ 3   Accel_Y (g)    312 non-null    float64
+ 4   Accel_Z (g)    312 non-null    float64
+ 5   Gyro_X (°/s)   312 non-null    float64
+ 6   Gyro_Y (°/s)   312 non-null    float64
+ 7   Gyro_Z (°/s)   312 non-null    float64
+ 8   Mag_X (G)      312 non-null    float64
+ 9   Mag_Y (G)      312 non-null    float64
+ 10  Mag_Z (G)      312 non-null    float64
+ 11  Timestamp (s)  312 non-null    float64
+ 12  shot_type      312 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 34.1+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:14:07.200  2025-11-05  13:14:07.164  ...            4.0       lift
+2025-11-05 13:14:07.300  2025-11-05  13:14:07.265  ...          104.0       lift
+2025-11-05 13:14:07.400  2025-11-05  13:14:07.365  ...          204.0       lift
+2025-11-05 13:14:07.500  2025-11-05  13:14:07.465  ...          304.0       lift
+2025-11-05 13:14:07.600  2025-11-05  13:14:07.565  ...          404.0       lift
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 312 entries, 2025-11-05 13:14:07.200000 to 2025-11-05 13:14:38.300000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           312 non-null    object
+ 1   Time           312 non-null    object
+ 2   Accel_X (g)    312 non-null    float64
+ 3   Accel_Y (g)    312 non-null    float64
+ 4   Accel_Z (g)    312 non-null    float64
+ 5   Gyro_X (°/s)   312 non-null    float64
+ 6   Gyro_Y (°/s)   312 non-null    float64
+ 7   Gyro_Z (°/s)   312 non-null    float64
+ 8   Mag_X (G)      312 non-null    float64
+ 9   Mag_Y (G)      312 non-null    float64
+ 10  Mag_Z (G)      312 non-null    float64
+ 11  Timestamp (s)  312 non-null    float64
+ 12  shot_type      312 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 34.1+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (249, 12)
+Shape of X_test: (63, 12)
+Shape of y_train: (249,)
+Shape of y_test: (63,)
+Creating windows for training set (Total Timesteps: 249).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 23 windows for the training set.
+Creating windows for validating set (Total Timesteps: 63).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 5 windows for the validating set.
+
+--- 4. Data Augmentation ---
+--- Starting Data Augmentation (Time Domain) ---
+Original Training Windows Shape: (23, 20, 9)
+[TimeDomainAug] Input shape: (23, 20, 9), Generating 3 augmented copies.
+--- Augmentation Pass #1 ---
+--- Augmentation Pass #2 ---
+--- Augmentation Pass #3 ---
+[TimeDomainAug] Output shape: X=(92, 20, 9), Y=(92,)
+--- Data Augmentation Complete ---
+NEW Total Training Windows Shape: (92, 20, 9)
+
+--- 5. Feature Extraction ---
+Feature extraction complete for training set. Final Feature DataFrame Shape: (92, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -0.146215         0.684983  ...     -0.675204       lift
+1         -0.148032         0.653162  ...     -0.827769       lift
+2          0.098411         0.765626  ...     -0.838439       lift
+3          0.119456         0.720872  ...     -0.350307       lift
+4          0.004952         0.643842  ...     -0.472350       lift
+
+[5 rows x 97 columns]
+Feature extraction complete for validating set. Final Feature DataFrame Shape: (5, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -0.201490         0.365338  ...     -0.707085       lift
+1         -0.106632         0.383045  ...     -0.727630       lift
+2         -0.055213         0.553605  ...      0.095871       lift
+3          0.013312         0.708329  ...      0.111349       lift
+4         -0.050483         0.670868  ...     -0.151959       lift
+
+[5 rows x 97 columns]
+
+--- 6. Feature Normalization ---
+StandardScaler fitted successfully on training data.
+Mean (per feature): [ 2.60265039e-02  7.04543167e-01  2.40053742e-01 -6.72558934e-01
+  1.77507767e+00  2.44763661e+00  7.41658594e-01 -3.55044448e-03
+  1.49580414e+00  5.59641949e-01 -1.26936429e+00  4.08234073e+00
+  5.35170503e+00  1.78379771e+00 -3.14220320e-02  6.82705348e-01
+  3.66537074e-01 -1.57832159e+00  1.12483528e+00  2.70315687e+00
+  7.18763081e-01 -1.24548947e+01  2.02277021e+02  5.39010445e+01
+ -4.58881666e+02  4.67763380e+02  9.26645046e+02  1.03226368e+02
+  1.59212941e+00  1.12261084e+02  4.21831947e+01 -1.26973344e+02
+  3.15424687e+02  4.42398031e+02  8.07058354e+01 -4.03311247e+00
+  1.03396533e+02  2.41419825e+01 -2.61610751e+02  1.04437878e+02
+  3.66048629e+02  8.20463333e+01  4.31255553e-03  1.20760037e-01
+  5.84847977e-02 -1.34274791e-01  2.60037119e-01  3.94311910e-01
+  1.59656193e-01  6.01038125e-03  3.12334924e-01  1.02647179e-01
+ -2.61798945e-01  6.62566687e-01  9.24365632e-01  4.20818715e-01
+  1.18643170e-04  7.34443533e-03  5.07566099e-03 -1.43631361e-02
+  1.44856606e-02  2.88487967e-02  9.61319446e-03  1.56293494e+00
+  9.43758990e-01  1.94236063e+02  1.71456949e+02  3.01107411e-01
+  1.56394478e-01  5.88043478e+00  2.36732051e+00  4.32780833e+00
+  5.78260870e+00  3.63339992e+02  5.93631632e+02  1.60007467e-03
+  1.01273069e+00  1.05759195e-02  2.08529420e+00 -1.81474172e-03
+  1.02831112e+00  2.49456522e+00  6.82104007e+00  4.17681422e+01
+  9.70108805e+01  2.58152174e+00  1.31081028e+03  1.05649398e+06
+  3.50579332e+06  7.73221909e+01  7.11423710e-01 -3.08758713e-01
+ -2.33711226e-01 -5.57583986e-01  3.86609555e-01 -5.95306366e-01]
+Std Dev (per feature): [1.09998972e-01 1.56785079e-01 1.08043896e-01 1.76722187e-01
+ 3.79728732e-01 4.66987871e-01 3.49705607e-01 2.63090489e-01
+ 3.00825879e-01 3.18561762e-01 6.24877967e-02 1.14390957e+00
+ 1.15105413e+00 3.44279090e-01 1.50750849e-01 1.54041856e-01
+ 1.04334904e-01 5.25937308e-01 1.78610028e-01 5.26973478e-01
+ 2.18779497e-01 3.28065261e+01 4.29419441e+01 2.91223865e+01
+ 7.14120045e+01 1.68248918e+02 1.76122978e+02 5.03248748e+01
+ 1.74653348e+01 2.41332191e+01 1.40345007e+01 2.97307014e+01
+ 7.32524722e+01 8.52407495e+01 2.76433651e+01 1.47676057e+01
+ 2.03287488e+01 1.18144802e+01 6.44915314e+01 3.80053564e+01
+ 8.03883186e+01 4.37623694e+01 2.35307873e-02 1.91460766e-02
+ 1.55532856e-02 2.05351396e-02 2.95384935e-02 3.81388673e-02
+ 6.20679519e-02 4.67180011e-02 3.12831046e-02 4.86814298e-02
+ 1.12645203e-02 5.58469291e-02 5.89550622e-02 1.43527243e-01
+ 1.65118267e-03 4.49038190e-03 3.27755801e-03 9.30222614e-03
+ 9.49581174e-03 1.79539730e-02 6.26256162e-03 1.87492692e-01
+ 2.75361095e-01 2.97286454e+01 2.85211457e+01 2.48348735e-02
+ 2.46466362e-02 6.89082429e-01 5.40331310e-01 1.04278028e+00
+ 7.34641098e-01 7.63407706e+01 7.91921940e+01 6.38155490e-02
+ 2.30537210e-01 1.29951735e-01 4.75424809e-01 5.04402746e-02
+ 2.51042949e-01 1.31565525e+00 2.09728807e+00 2.69857345e+01
+ 5.02725338e+01 1.42240835e+00 3.21829247e+02 6.35394768e+05
+ 1.30874025e+06 3.33846209e+01 1.55897581e-01 2.51385760e-01
+ 2.97700260e-01 1.81571333e-01 2.47949979e-01 1.74118464e-01]
+
+Feature Normalization Complete.
+Scaled Training Features Shape: (92, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -1.565845        -0.124755  ...     -0.458867       lift
+1         -1.582365        -0.327715  ...     -1.335083       lift
+2          0.658044         0.389596  ...     -1.396363       lift
+3          0.849370         0.104146  ...      1.407087       lift
+4         -0.191590        -0.387160  ...      0.706163       lift
+
+[5 rows x 97 columns]
+
+--- 7. Dumping Final CSV ---
+✅ Successfully exported SCALED training features to: ./combined_final_features/A4_features_lift.csv
+✅ Successfully exported SCALED testing features to: ./combined_final_features/A4_validation_lift.csv
+| Pipeline for lift finished. Files saved to './combined_final_features'. |
+=======================================================
+Processing configurations for: smash
+
+=======================================================
+| STARTING PIPELINE for Shot Type: smash |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: smash
+Loaded: ./new_10_kyle/smash_10_kyle.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-11-05  13:08:58.842      0.00031  ...   -0.48713     0.2121            4.0
+1  2025-11-05  13:08:58.943     -0.00344  ...   -0.48758     0.2121          104.0
+2  2025-11-05  13:08:59.042     -0.00556  ...   -0.48783     0.2121          204.0
+3  2025-11-05  13:08:59.142     -0.00399  ...   -0.48733     0.2121          304.0
+4  2025-11-05  13:08:59.242     -0.00079  ...   -0.48783     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 251 entries, 2025-11-05 13:08:58.842000 to 2025-11-05 13:09:23.842000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           251 non-null    object
+ 1   Time           251 non-null    object
+ 2   Accel_X (g)    251 non-null    float64
+ 3   Accel_Y (g)    251 non-null    float64
+ 4   Accel_Z (g)    251 non-null    float64
+ 5   Gyro_X (°/s)   251 non-null    float64
+ 6   Gyro_Y (°/s)   251 non-null    float64
+ 7   Gyro_Z (°/s)   251 non-null    float64
+ 8   Mag_X (G)      251 non-null    float64
+ 9   Mag_Y (G)      251 non-null    float64
+ 10  Mag_Z (G)      251 non-null    float64
+ 11  Timestamp (s)  251 non-null    float64
+ 12  shot_type      251 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 27.5+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:08:58.900  2025-11-05  13:08:58.842  ...            4.0      smash
+2025-11-05 13:08:59.000  2025-11-05  13:08:58.943  ...          104.0      smash
+2025-11-05 13:08:59.100  2025-11-05  13:08:59.042  ...          204.0      smash
+2025-11-05 13:08:59.200  2025-11-05  13:08:59.142  ...          304.0      smash
+2025-11-05 13:08:59.300  2025-11-05  13:08:59.242  ...          404.0      smash
+
+[5 rows x 13 columns]
+-0.016392719999999996
+0.07278413126263324
+0.21209999999999996
+5.562250771475058e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 250 entries, 2025-11-05 13:08:58.900000 to 2025-11-05 13:09:23.800000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           250 non-null    object
+ 1   Time           250 non-null    object
+ 2   Accel_X (g)    250 non-null    float64
+ 3   Accel_Y (g)    250 non-null    float64
+ 4   Accel_Z (g)    250 non-null    float64
+ 5   Gyro_X (°/s)   250 non-null    float64
+ 6   Gyro_Y (°/s)   250 non-null    float64
+ 7   Gyro_Z (°/s)   250 non-null    float64
+ 8   Mag_X (G)      250 non-null    float64
+ 9   Mag_Y (G)      250 non-null    float64
+ 10  Mag_Z (G)      250 non-null    float64
+ 11  Timestamp (s)  250 non-null    float64
+ 12  shot_type      250 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 27.3+ KB
+column: Accel_X (g) mean: 0.24157807999999997 subtracted
+column: Accel_Y (g) mean: -0.18068628 subtracted
+column: Accel_Z (g) mean: -0.23528124 subtracted
+column: Gyro_X (°/s) mean: 21.813966120000003 subtracted
+column: Gyro_Y (°/s) mean: -25.3459898 subtracted
+column: Gyro_Z (°/s) mean: -33.386935359999995 subtracted
+column: Mag_X (G) mean: -0.016392719999999996 subtracted
+column: Mag_Y (G) mean: -0.41856504 subtracted
+column: Mag_Z (G) mean: 0.21209999999999996 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:08:58.900  2025-11-05  13:08:58.842  ...            4.0      smash
+2025-11-05 13:08:59.000  2025-11-05  13:08:58.943  ...          104.0      smash
+2025-11-05 13:08:59.100  2025-11-05  13:08:59.042  ...          204.0      smash
+2025-11-05 13:08:59.200  2025-11-05  13:08:59.142  ...          304.0      smash
+2025-11-05 13:08:59.300  2025-11-05  13:08:59.242  ...          404.0      smash
+
+[5 rows x 13 columns]
+-2.6645352591003758e-18
+0.07278413126263324
+5.551115123125783e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 250 entries, 2025-11-05 13:08:58.900000 to 2025-11-05 13:09:23.800000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           250 non-null    object
+ 1   Time           250 non-null    object
+ 2   Accel_X (g)    250 non-null    float64
+ 3   Accel_Y (g)    250 non-null    float64
+ 4   Accel_Z (g)    250 non-null    float64
+ 5   Gyro_X (°/s)   250 non-null    float64
+ 6   Gyro_Y (°/s)   250 non-null    float64
+ 7   Gyro_Z (°/s)   250 non-null    float64
+ 8   Mag_X (G)      250 non-null    float64
+ 9   Mag_Y (G)      250 non-null    float64
+ 10  Mag_Z (G)      250 non-null    float64
+ 11  Timestamp (s)  250 non-null    float64
+ 12  shot_type      250 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 27.3+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:08:58.900  2025-11-05  13:08:58.842  ...            4.0      smash
+2025-11-05 13:08:59.000  2025-11-05  13:08:58.943  ...          104.0      smash
+2025-11-05 13:08:59.100  2025-11-05  13:08:59.042  ...          204.0      smash
+2025-11-05 13:08:59.200  2025-11-05  13:08:59.142  ...          304.0      smash
+2025-11-05 13:08:59.300  2025-11-05  13:08:59.242  ...          404.0      smash
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 250 entries, 2025-11-05 13:08:58.900000 to 2025-11-05 13:09:23.800000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           250 non-null    object
+ 1   Time           250 non-null    object
+ 2   Accel_X (g)    250 non-null    float64
+ 3   Accel_Y (g)    250 non-null    float64
+ 4   Accel_Z (g)    250 non-null    float64
+ 5   Gyro_X (°/s)   250 non-null    float64
+ 6   Gyro_Y (°/s)   250 non-null    float64
+ 7   Gyro_Z (°/s)   250 non-null    float64
+ 8   Mag_X (G)      250 non-null    float64
+ 9   Mag_Y (G)      250 non-null    float64
+ 10  Mag_Z (G)      250 non-null    float64
+ 11  Timestamp (s)  250 non-null    float64
+ 12  shot_type      250 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 27.3+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (200, 12)
+Shape of X_test: (50, 12)
+Shape of y_train: (200,)
+Shape of y_test: (50,)
+Creating windows for training set (Total Timesteps: 200).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 19 windows for the training set.
+Creating windows for validating set (Total Timesteps: 50).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 4 windows for the validating set.
+
+--- 4. Data Augmentation ---
+--- Starting Data Augmentation (Time Domain) ---
+Original Training Windows Shape: (19, 20, 9)
+[TimeDomainAug] Input shape: (19, 20, 9), Generating 3 augmented copies.
+--- Augmentation Pass #1 ---
+--- Augmentation Pass #2 ---
+--- Augmentation Pass #3 ---
+[TimeDomainAug] Output shape: X=(76, 20, 9), Y=(76,)
+--- Data Augmentation Complete ---
+NEW Total Training Windows Shape: (76, 20, 9)
+
+--- 5. Feature Extraction ---
+Feature extraction complete for training set. Final Feature DataFrame Shape: (76, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -0.063531         0.522324  ...     -0.342282      smash
+1          0.025373         0.503258  ...     -0.416913      smash
+2          0.041820         0.668889  ...     -0.523653      smash
+3         -0.039177         0.571575  ...     -0.529077      smash
+4         -0.052133         0.534213  ...     -0.638450      smash
+
+[5 rows x 97 columns]
+Feature extraction complete for validating set. Final Feature DataFrame Shape: (4, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -0.105977         0.477133  ...     -0.277720      smash
+1         -0.125474         0.486556  ...     -0.214195      smash
+2         -0.113433         0.595763  ...     -0.185967      smash
+3         -0.101934         0.600567  ...     -0.411367      smash
+
+[4 rows x 97 columns]
+
+--- 6. Feature Normalization ---
+StandardScaler fitted successfully on training data.
+Mean (per feature): [ 3.19067854e-02  5.59265454e-01  1.12263986e-01 -4.96544683e-01
+  1.74332187e+00  2.23986655e+00  2.70463682e-01  4.28004605e-02
+  1.84434780e+00  1.84240187e-01 -1.10101298e+00  5.82375555e+00
+  6.92476853e+00  6.53337273e-01 -8.38264215e-02  1.09093806e+00
+  3.07428683e-01 -3.11597805e+00  1.45186011e+00  4.56783815e+00
+  5.94872404e-01 -2.51334431e+00  1.77206027e+02  5.50182019e+01
+ -4.92648483e+02  3.49813525e+02  8.42462008e+02  1.18607334e+02
+ -2.19489235e+00  4.92196821e+01  2.46026279e+01 -1.08642023e+02
+  8.76273515e+01  1.96269374e+02  5.75581244e+01 -6.98032847e-01
+  8.12056151e+01  1.55990646e+01 -2.41300432e+02  8.12363130e+01
+  3.22536744e+02  4.46223677e+01  6.69455272e-04  6.86876797e-02
+  3.80790340e-02 -1.05406387e-01  1.52320798e-01  2.57727185e-01
+  8.03768197e-02  3.11314302e-03  1.38914160e-01  2.11270701e-02
+ -9.92353969e-02  3.96655337e-01  4.95890733e-01  1.01011055e-01
+  1.50594908e-04  7.28805769e-03  5.07215210e-03 -1.31135823e-02
+  1.37978376e-02  2.69114199e-02  9.85181332e-03  1.62443897e+00
+  1.56530285e+00  1.49700293e+02  1.43472935e+02  1.26431436e-01
+  9.27896883e-02  5.67105263e+00  3.10994193e+00  6.22313285e+00
+  5.68421053e+00  2.78166684e+02  5.42127935e+02 -9.84703542e-03
+  8.15527974e-01 -6.23659520e-02  2.74607651e+00  2.41095264e-02
+  1.62127599e+00  3.39473684e+00  1.16550521e+01  8.32906411e+01
+  2.79747784e+02  2.89473684e+00  1.01412067e+03  9.11067563e+05
+  2.33736461e+06  8.47085899e+01  7.27761404e-01 -7.16178569e-01
+ -4.05611685e-01 -3.91122719e-01  2.32085350e-01 -4.97955199e-01]
+Std Dev (per feature): [6.93555412e-02 1.06635543e-01 2.68125117e-02 1.41401879e-01
+ 3.19090429e-01 3.62213649e-01 9.90686560e-02 2.61948568e-01
+ 3.30648945e-01 9.59278524e-02 1.61477146e-01 7.62150186e-01
+ 7.41662021e-01 3.29122931e-01 2.02409999e-01 2.68549841e-01
+ 8.45643594e-02 6.19173639e-01 4.40416362e-01 8.88148521e-01
+ 1.83716066e-01 3.96237009e+01 3.97143897e+01 2.21011574e+01
+ 1.59902604e+02 1.16434823e+02 2.09140255e+02 4.85780591e+01
+ 1.44662188e+01 7.85545607e+00 1.50739230e+01 1.76257564e+01
+ 3.08123836e+01 2.66095967e+01 3.08552757e+01 1.73373033e+01
+ 1.84547725e+01 6.42725447e+00 4.87454267e+01 2.57793933e+01
+ 4.60435947e+01 2.67021370e+01 1.04022378e-02 9.20702953e-03
+ 1.18910897e-02 2.24727863e-02 1.92437567e-02 2.94512571e-02
+ 2.44419072e-02 1.87003240e-02 2.14994466e-02 7.48565939e-03
+ 8.73597093e-03 6.49852293e-02 6.74717278e-02 6.44473976e-02
+ 2.16383267e-03 4.36282986e-03 3.17737468e-03 8.50259373e-03
+ 9.00916965e-03 1.62039721e-02 6.17926230e-03 2.64831641e-01
+ 2.50048869e-01 2.15136800e+01 3.21315765e+01 1.44944141e-02
+ 1.73815365e-02 8.17379605e-01 8.82756153e-01 5.49005378e-01
+ 7.98197415e-01 5.82337284e+01 1.17471855e+02 5.49042155e-02
+ 1.84091082e-01 1.36906060e-01 5.36459409e-01 9.90097970e-02
+ 5.15125110e-01 1.36284288e+00 3.13145013e+00 3.43342941e+01
+ 1.23594577e+02 1.54390949e+00 2.18457525e+02 7.19009247e+05
+ 8.99382129e+05 3.45037184e+01 1.73399121e-01 9.66094920e-02
+ 2.56782432e-01 2.52668860e-01 4.23564574e-01 1.00816190e-01]
+
+Feature Normalization Complete.
+Scaled Training Features Shape: (76, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -1.376067        -0.346431  ...      1.544132      smash
+1         -0.094204        -0.525218  ...      0.803862      smash
+2          0.142932         1.028024  ...     -0.254894      smash
+3         -1.024922         0.115440  ...     -0.308697      smash
+4         -1.211723        -0.234934  ...     -1.393573      smash
+
+[5 rows x 97 columns]
+
+--- 7. Dumping Final CSV ---
+✅ Successfully exported SCALED training features to: ./combined_final_features/A4_features_smash.csv
+✅ Successfully exported SCALED testing features to: ./combined_final_features/A4_validation_smash.csv
+| Pipeline for smash finished. Files saved to './combined_final_features'. |
+=======================================================
+Processing configurations for: clear
+
+=======================================================
+| STARTING PIPELINE for Shot Type: clear |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: clear
+Loaded: ./badminton_shots/clear_x30.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-10-20  13:09:12.597      0.07543  ...   -0.36313     0.2121            4.0
+1  2025-10-20  13:09:12.698      0.14208  ...   -0.37900     0.2121          104.0
+2  2025-10-20  13:09:12.795      0.17734  ...   -0.38178     0.2121          204.0
+3  2025-10-20  13:09:12.898      0.37348  ...   -0.38128     0.2121          304.0
+4  2025-10-20  13:09:12.998      0.97901  ...   -0.40476     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 618 entries, 2025-10-20 13:09:12.597000 to 2025-10-20 13:10:14.302000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           618 non-null    object
+ 1   Time           618 non-null    object
+ 2   Accel_X (g)    618 non-null    float64
+ 3   Accel_Y (g)    618 non-null    float64
+ 4   Accel_Z (g)    618 non-null    float64
+ 5   Gyro_X (°/s)   618 non-null    float64
+ 6   Gyro_Y (°/s)   618 non-null    float64
+ 7   Gyro_Z (°/s)   618 non-null    float64
+ 8   Mag_X (G)      618 non-null    float64
+ 9   Mag_Y (G)      618 non-null    float64
+ 10  Mag_Z (G)      618 non-null    float64
+ 11  Timestamp (s)  618 non-null    float64
+ 12  shot_type      618 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 67.6+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 13:09:12.600  2025-10-20  13:09:12.597  ...            4.0      clear
+2025-10-20 13:09:12.700  2025-10-20  13:09:12.698  ...          104.0      clear
+2025-10-20 13:09:12.800  2025-10-20  13:09:12.795  ...          204.0      clear
+2025-10-20 13:09:12.900  2025-10-20  13:09:12.898  ...          304.0      clear
+2025-10-20 13:09:13.000  2025-10-20  13:09:12.998  ...          404.0      clear
+
+[5 rows x 13 columns]
+0.01163776699029126
+0.24804473727923795
+0.21209999999999998
+2.777805887214321e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 618 entries, 2025-10-20 13:09:12.600000 to 2025-10-20 13:10:14.300000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           618 non-null    object
+ 1   Time           618 non-null    object
+ 2   Accel_X (g)    618 non-null    float64
+ 3   Accel_Y (g)    618 non-null    float64
+ 4   Accel_Z (g)    618 non-null    float64
+ 5   Gyro_X (°/s)   618 non-null    float64
+ 6   Gyro_Y (°/s)   618 non-null    float64
+ 7   Gyro_Z (°/s)   618 non-null    float64
+ 8   Mag_X (G)      618 non-null    float64
+ 9   Mag_Y (G)      618 non-null    float64
+ 10  Mag_Z (G)      618 non-null    float64
+ 11  Timestamp (s)  618 non-null    float64
+ 12  shot_type      618 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 67.6+ KB
+column: Accel_X (g) mean: 0.4654561326860842 subtracted
+column: Accel_Y (g) mean: 0.9765875728155338 subtracted
+column: Accel_Z (g) mean: -0.73141428802589 subtracted
+column: Gyro_X (°/s) mean: 26.723956148867316 subtracted
+column: Gyro_Y (°/s) mean: -96.71416169902913 subtracted
+column: Gyro_Z (°/s) mean: 39.692073058252426 subtracted
+column: Mag_X (G) mean: 0.01163776699029126 subtracted
+column: Mag_Y (G) mean: -0.18386537216828477 subtracted
+column: Mag_Z (G) mean: 0.21209999999999998 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 13:09:12.600  2025-10-20  13:09:12.597  ...            4.0      clear
+2025-10-20 13:09:12.700  2025-10-20  13:09:12.698  ...          104.0      clear
+2025-10-20 13:09:12.800  2025-10-20  13:09:12.795  ...          204.0      clear
+2025-10-20 13:09:12.900  2025-10-20  13:09:12.898  ...          304.0      clear
+2025-10-20 13:09:13.000  2025-10-20  13:09:12.998  ...          404.0      clear
+
+[5 rows x 13 columns]
+-3.5929547722496977e-19
+0.24804473727923795
+2.7755575615628914e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 618 entries, 2025-10-20 13:09:12.600000 to 2025-10-20 13:10:14.300000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           618 non-null    object
+ 1   Time           618 non-null    object
+ 2   Accel_X (g)    618 non-null    float64
+ 3   Accel_Y (g)    618 non-null    float64
+ 4   Accel_Z (g)    618 non-null    float64
+ 5   Gyro_X (°/s)   618 non-null    float64
+ 6   Gyro_Y (°/s)   618 non-null    float64
+ 7   Gyro_Z (°/s)   618 non-null    float64
+ 8   Mag_X (G)      618 non-null    float64
+ 9   Mag_Y (G)      618 non-null    float64
+ 10  Mag_Z (G)      618 non-null    float64
+ 11  Timestamp (s)  618 non-null    float64
+ 12  shot_type      618 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 67.6+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 13:09:12.600  2025-10-20  13:09:12.597  ...            4.0      clear
+2025-10-20 13:09:12.700  2025-10-20  13:09:12.698  ...          104.0      clear
+2025-10-20 13:09:12.800  2025-10-20  13:09:12.795  ...          204.0      clear
+2025-10-20 13:09:12.900  2025-10-20  13:09:12.898  ...          304.0      clear
+2025-10-20 13:09:13.000  2025-10-20  13:09:12.998  ...          404.0      clear
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 618 entries, 2025-10-20 13:09:12.600000 to 2025-10-20 13:10:14.300000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           618 non-null    object
+ 1   Time           618 non-null    object
+ 2   Accel_X (g)    618 non-null    float64
+ 3   Accel_Y (g)    618 non-null    float64
+ 4   Accel_Z (g)    618 non-null    float64
+ 5   Gyro_X (°/s)   618 non-null    float64
+ 6   Gyro_Y (°/s)   618 non-null    float64
+ 7   Gyro_Z (°/s)   618 non-null    float64
+ 8   Mag_X (G)      618 non-null    float64
+ 9   Mag_Y (G)      618 non-null    float64
+ 10  Mag_Z (G)      618 non-null    float64
+ 11  Timestamp (s)  618 non-null    float64
+ 12  shot_type      618 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 67.6+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (494, 12)
+Shape of X_test: (124, 12)
+Shape of y_train: (494,)
+Shape of y_test: (124,)
+Creating windows for training set (Total Timesteps: 494).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 48 windows for the training set.
+Creating windows for validating set (Total Timesteps: 124).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 11 windows for the validating set.
+
+--- 4. Data Augmentation ---
+--- Starting Data Augmentation (Time Domain) ---
+Original Training Windows Shape: (48, 20, 9)
+[TimeDomainAug] Input shape: (48, 20, 9), Generating 3 augmented copies.
+--- Augmentation Pass #1 ---
+--- Augmentation Pass #2 ---
+--- Augmentation Pass #3 ---
+[TimeDomainAug] Output shape: X=(192, 20, 9), Y=(192,)
+--- Data Augmentation Complete ---
+NEW Total Training Windows Shape: (192, 20, 9)
+
+--- 5. Feature Extraction ---
+Feature extraction complete for training set. Final Feature DataFrame Shape: (192, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0          0.016638         0.621706  ...      0.327995      clear
+1          0.203033         0.764977  ...      0.289865      clear
+2          0.135935         0.719062  ...      0.193708      clear
+3          0.163267         0.549297  ...      0.355884      clear
+4          0.142025         0.530414  ...      0.287322      clear
+
+[5 rows x 97 columns]
+Feature extraction complete for validating set. Final Feature DataFrame Shape: (11, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0          0.158967         0.570651  ...      0.519959      clear
+1         -0.219311         0.990826  ...     -0.286804      clear
+2         -0.407816         0.961070  ...     -0.328386      clear
+3         -0.226760         0.655739  ...      0.240374      clear
+4         -0.310039         0.615312  ...      0.009607      clear
+
+[5 rows x 97 columns]
+
+--- 6. Feature Normalization ---
+StandardScaler fitted successfully on training data.
+Mean (per feature): [ 1.10497087e-02  6.32236683e-01  2.94912318e-01 -1.26277089e+00
+  1.49713795e+00  2.75990884e+00  5.76793022e-01  4.10778597e-02
+  2.50144370e+00  6.75386835e-01 -2.22579873e+00  5.58048359e+00
+  7.80628233e+00  2.94986347e+00  1.29364583e-02  8.27539639e-01
+  4.27715903e-01 -1.91016571e+00  1.61637690e+00  3.52654261e+00
+  8.42233848e-01 -9.65902610e+00  2.91112787e+02  7.50628369e+01
+ -8.45464566e+02  4.24213373e+02  1.26967794e+03  1.66716767e+02
+ -8.55772422e+00  1.82143952e+02  8.34004453e+01 -4.20674946e+02
+  3.31881950e+02  7.52556896e+02  1.93354159e+02 -3.83562948e+00
+  1.89347632e+02  5.75910940e+01 -4.22557716e+02  4.15317836e+02
+  8.37875552e+02  1.38121240e+02 -2.62545378e-03  2.33864482e-01
+  1.07454177e-01 -4.75055824e-01  2.36666444e-01  7.11722268e-01
+  3.26575963e-01 -2.74035240e-03  2.24348260e-01  9.22315599e-02
+ -2.40569407e-01  4.70117040e-01  7.10686447e-01  3.01864703e-01
+  1.92142597e-04  7.14293674e-03  4.85300201e-03 -1.36869045e-02
+  1.41338851e-02  2.78207896e-02  9.36674900e-03  2.39534521e+00
+  1.42931265e+00  2.92740216e+02  2.78662042e+02  3.07434179e-01
+  1.30084749e-01  6.01562500e+00  3.61754905e+00  5.82931268e+00
+  6.01041667e+00  5.39647637e+02  1.02304991e+03 -8.98950241e-03
+  9.39029512e-01  7.76738205e-03  3.51241900e+00  2.68069585e-03
+  1.20760331e+00  2.62239583e+00  1.07572679e+01  1.02670279e+02
+  2.12813617e+02  2.69791667e+00  2.08001829e+03  3.62975437e+06
+  8.52198725e+06  1.59305420e+02  5.35552114e-02 -8.85081541e-02
+ -5.01353904e-02  5.00181104e-01  6.79169655e-01  5.33085042e-02]
+Std Dev (per feature): [1.62672999e-01 2.05721720e-01 1.00734616e-01 6.46700417e-01
+ 8.34942913e-01 1.09517130e+00 1.89084259e-01 5.76684658e-01
+ 4.25533869e-01 4.18508636e-01 1.79036652e-01 9.12819645e-01
+ 9.18319102e-01 1.72567596e+00 1.84528297e-01 1.79788528e-01
+ 9.93374415e-02 8.20753580e-01 6.81871433e-01 9.34777385e-01
+ 1.69293443e-01 5.79663152e+01 8.28738107e+01 4.65783242e+01
+ 3.19763162e+02 7.95013896e+01 3.29486006e+02 8.37909859e+01
+ 4.70632859e+01 4.91204671e+01 3.43656104e+01 1.53372428e+02
+ 1.11406236e+02 1.94185352e+02 8.28959097e+01 5.03134816e+01
+ 5.10825689e+01 4.25707130e+01 2.03256968e+02 9.12059923e+01
+ 1.99503011e+02 1.07838569e+02 5.82715925e-02 3.07706136e-02
+ 6.64631690e-02 6.70591313e-02 2.06142057e-02 7.61694913e-02
+ 1.42342233e-01 4.97208959e-02 3.51919136e-02 4.77173132e-02
+ 3.51812797e-02 8.18808893e-02 8.73318724e-02 1.50771553e-01
+ 1.70692883e-03 4.35237905e-03 3.15080812e-03 9.16309036e-03
+ 9.35535304e-03 1.73241531e-02 6.05070069e-03 3.15436376e-01
+ 3.35308600e-01 7.29877260e+01 7.26435004e+01 3.06569878e-02
+ 2.80612836e-02 8.68886755e-01 7.05341040e-01 1.01792590e+00
+ 1.00514087e+00 1.81701322e+02 3.09186817e+02 5.31480390e-02
+ 3.22017020e-01 2.25941141e-01 6.73112158e-01 6.55708487e-02
+ 2.88241691e-01 1.39264006e+00 2.81148633e+00 7.97001442e+01
+ 1.01279323e+02 1.36259397e+00 5.81912614e+02 2.37634858e+06
+ 5.56603858e+06 8.81630817e+01 3.80581214e-01 2.70744278e-01
+ 3.85008221e-01 3.20513199e-01 1.92952720e-01 3.69160408e-01]
+
+Feature Normalization Complete.
+Scaled Training Features Shape: (192, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0          0.034353        -0.051190  ...      0.744084      clear
+1          1.180179         0.645240  ...      0.640797      clear
+2          0.767709         0.422051  ...      0.380320      clear
+3          0.935725        -0.403163  ...      0.819632      clear
+4          0.805147        -0.494953  ...      0.633908      clear
+
+[5 rows x 97 columns]
+
+--- 7. Dumping Final CSV ---
+✅ Successfully exported SCALED training features to: ./combined_final_features/A3_features_clear.csv
+✅ Successfully exported SCALED testing features to: ./combined_final_features/A3_validation_clear.csv
+| Pipeline for clear finished. Files saved to './combined_final_features'. |
+=======================================================
+Processing configurations for: drive
+
+=======================================================
+| STARTING PIPELINE for Shot Type: drive |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: drive
+Loaded: ./badminton_shots/drive_x30.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-10-20  12:52:43.082      0.42255  ...   -0.21536     0.2121            4.0
+1  2025-10-20  12:52:43.183      0.35928  ...   -0.20478     0.2121          104.0
+2  2025-10-20  12:52:43.282      0.21738  ...   -0.20045     0.2121          204.0
+3  2025-10-20  12:52:43.382      0.07804  ...   -0.18736     0.2121          304.0
+4  2025-10-20  12:52:43.479      0.12556  ...   -0.19367     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 613 entries, 2025-10-20 12:52:43.082000 to 2025-10-20 12:53:44.286000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           613 non-null    object
+ 1   Time           613 non-null    object
+ 2   Accel_X (g)    613 non-null    float64
+ 3   Accel_Y (g)    613 non-null    float64
+ 4   Accel_Z (g)    613 non-null    float64
+ 5   Gyro_X (°/s)   613 non-null    float64
+ 6   Gyro_Y (°/s)   613 non-null    float64
+ 7   Gyro_Z (°/s)   613 non-null    float64
+ 8   Mag_X (G)      613 non-null    float64
+ 9   Mag_Y (G)      613 non-null    float64
+ 10  Mag_Z (G)      613 non-null    float64
+ 11  Timestamp (s)  613 non-null    float64
+ 12  shot_type      613 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 67.0+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 12:52:43.100  2025-10-20  12:52:43.082  ...            4.0      drive
+2025-10-20 12:52:43.200  2025-10-20  12:52:43.183  ...          104.0      drive
+2025-10-20 12:52:43.300  2025-10-20  12:52:43.282  ...          204.0      drive
+2025-10-20 12:52:43.400  2025-10-20  12:52:43.382  ...          304.0      drive
+2025-10-20 12:52:43.500  2025-10-20  12:52:43.479  ...          404.0      drive
+
+[5 rows x 13 columns]
+0.077034477124183
+0.17992469226948682
+0.21209999999999998
+2.7778279566759113e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 612 entries, 2025-10-20 12:52:43.100000 to 2025-10-20 12:53:44.200000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           612 non-null    object
+ 1   Time           612 non-null    object
+ 2   Accel_X (g)    612 non-null    float64
+ 3   Accel_Y (g)    612 non-null    float64
+ 4   Accel_Z (g)    612 non-null    float64
+ 5   Gyro_X (°/s)   612 non-null    float64
+ 6   Gyro_Y (°/s)   612 non-null    float64
+ 7   Gyro_Z (°/s)   612 non-null    float64
+ 8   Mag_X (G)      612 non-null    float64
+ 9   Mag_Y (G)      612 non-null    float64
+ 10  Mag_Z (G)      612 non-null    float64
+ 11  Timestamp (s)  612 non-null    float64
+ 12  shot_type      612 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 66.9+ KB
+column: Accel_X (g) mean: 0.2257943464052288 subtracted
+column: Accel_Y (g) mean: -0.4739877124183006 subtracted
+column: Accel_Z (g) mean: -0.6252923529411765 subtracted
+column: Gyro_X (°/s) mean: 12.367112908496733 subtracted
+column: Gyro_Y (°/s) mean: 2.423126552287581 subtracted
+column: Gyro_Z (°/s) mean: 0.15461686274509812 subtracted
+column: Mag_X (G) mean: 0.077034477124183 subtracted
+column: Mag_Y (G) mean: -0.3170302777777778 subtracted
+column: Mag_Z (G) mean: 0.21209999999999998 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 12:52:43.100  2025-10-20  12:52:43.082  ...            4.0      drive
+2025-10-20 12:52:43.200  2025-10-20  12:52:43.183  ...          104.0      drive
+2025-10-20 12:52:43.300  2025-10-20  12:52:43.282  ...          204.0      drive
+2025-10-20 12:52:43.400  2025-10-20  12:52:43.382  ...          304.0      drive
+2025-10-20 12:52:43.500  2025-10-20  12:52:43.479  ...          404.0      drive
+
+[5 rows x 13 columns]
+7.256359638072919e-18
+0.17992469226948682
+2.7755575615628914e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 612 entries, 2025-10-20 12:52:43.100000 to 2025-10-20 12:53:44.200000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           612 non-null    object
+ 1   Time           612 non-null    object
+ 2   Accel_X (g)    612 non-null    float64
+ 3   Accel_Y (g)    612 non-null    float64
+ 4   Accel_Z (g)    612 non-null    float64
+ 5   Gyro_X (°/s)   612 non-null    float64
+ 6   Gyro_Y (°/s)   612 non-null    float64
+ 7   Gyro_Z (°/s)   612 non-null    float64
+ 8   Mag_X (G)      612 non-null    float64
+ 9   Mag_Y (G)      612 non-null    float64
+ 10  Mag_Z (G)      612 non-null    float64
+ 11  Timestamp (s)  612 non-null    float64
+ 12  shot_type      612 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 66.9+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 12:52:43.100  2025-10-20  12:52:43.082  ...            4.0      drive
+2025-10-20 12:52:43.200  2025-10-20  12:52:43.183  ...          104.0      drive
+2025-10-20 12:52:43.300  2025-10-20  12:52:43.282  ...          204.0      drive
+2025-10-20 12:52:43.400  2025-10-20  12:52:43.382  ...          304.0      drive
+2025-10-20 12:52:43.500  2025-10-20  12:52:43.479  ...          404.0      drive
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 612 entries, 2025-10-20 12:52:43.100000 to 2025-10-20 12:53:44.200000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           612 non-null    object
+ 1   Time           612 non-null    object
+ 2   Accel_X (g)    612 non-null    float64
+ 3   Accel_Y (g)    612 non-null    float64
+ 4   Accel_Z (g)    612 non-null    float64
+ 5   Gyro_X (°/s)   612 non-null    float64
+ 6   Gyro_Y (°/s)   612 non-null    float64
+ 7   Gyro_Z (°/s)   612 non-null    float64
+ 8   Mag_X (G)      612 non-null    float64
+ 9   Mag_Y (G)      612 non-null    float64
+ 10  Mag_Z (G)      612 non-null    float64
+ 11  Timestamp (s)  612 non-null    float64
+ 12  shot_type      612 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 66.9+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (489, 12)
+Shape of X_test: (123, 12)
+Shape of y_train: (489,)
+Shape of y_test: (123,)
+Creating windows for training set (Total Timesteps: 489).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 47 windows for the training set.
+Creating windows for validating set (Total Timesteps: 123).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 11 windows for the validating set.
+
+--- 4. Data Augmentation ---
+--- Starting Data Augmentation (Time Domain) ---
+Original Training Windows Shape: (47, 20, 9)
+[TimeDomainAug] Input shape: (47, 20, 9), Generating 3 augmented copies.
+--- Augmentation Pass #1 ---
+--- Augmentation Pass #2 ---
+--- Augmentation Pass #3 ---
+[TimeDomainAug] Output shape: X=(188, 20, 9), Y=(188,)
+--- Data Augmentation Complete ---
+NEW Total Training Windows Shape: (188, 20, 9)
+
+--- 5. Feature Extraction ---
+Feature extraction complete for training set. Final Feature DataFrame Shape: (188, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0          0.128653         0.271631  ...     -0.468088      drive
+1          0.143266         0.191466  ...     -0.789880      drive
+2          0.146862         0.270632  ...     -0.807964      drive
+3         -0.057124         0.460825  ...     -0.819787      drive
+4         -0.078852         0.532321  ...     -0.731102      drive
+
+[5 rows x 97 columns]
+Feature extraction complete for validating set. Final Feature DataFrame Shape: (11, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0          0.092721         0.368311  ...     -0.618325      drive
+1          0.146018         0.376744  ...     -0.665183      drive
+2          0.021949         0.498278  ...     -0.681040      drive
+3          0.037517         0.381711  ...     -0.685114      drive
+4          0.032637         0.386284  ...     -0.753683      drive
+
+[5 rows x 97 columns]
+
+--- 6. Feature Normalization ---
+StandardScaler fitted successfully on training data.
+Mean (per feature): [-1.39463097e-02  4.41577527e-01  2.00955295e-01 -1.12128468e+00
+  6.53228824e-01  1.77451351e+00  4.77884915e-01  9.96025790e-03
+  6.37536392e-01  2.19500248e-01 -8.23195337e-01  1.78784181e+00
+  2.61103715e+00  4.72694294e-01  1.23885358e-02  5.70720177e-01
+  2.94952383e-01 -8.90454446e-01  1.46195213e+00  2.35240658e+00
+  5.82910264e-01 -2.64692248e-01  1.22372389e+02  5.48515035e+01
+ -1.87501183e+02  2.95888497e+02  4.83389680e+02  1.01309927e+02
+  4.53120835e-01  9.42258758e+01  3.76847973e+01 -1.90491586e+02
+  1.88975684e+02  3.79467270e+02  8.09298742e+01 -2.00432224e+00
+  7.03091602e+01  3.29520057e+01 -1.56735697e+02  1.25921453e+02
+  2.82657150e+02  6.60464292e+01 -4.40412356e-03  1.69880258e-01
+  9.28795301e-02 -4.16904766e-01  1.81881766e-01  5.98786533e-01
+  2.19879894e-01 -2.33702356e-03  9.93791377e-02  7.81880614e-02
+ -1.62211365e-01  1.52260043e-01  3.14471409e-01  1.66530805e-01
+  1.56498806e-05  6.93023222e-03  4.54837393e-03 -1.37827199e-02
+  1.33002122e-02  2.70829321e-02  8.73623048e-03  8.04544998e-01
+  5.83790354e-01  1.36821968e+02  1.09798539e+02  1.80801467e-01
+  9.06111875e-02  5.98404255e+00  1.36110233e+00  2.26062330e+00
+  6.37765957e+00  2.37873250e+02  3.59099041e+02 -5.30929146e-03
+  6.65979944e-01  5.59103149e-03  9.39628145e-01  7.58674254e-03
+  8.52429099e-01  2.63563830e+00  4.46968366e+00  1.47189039e+01
+  3.63743460e+01  2.99468085e+00  8.98863895e+02  5.13604889e+05
+  1.27908184e+06  6.95250744e+01 -5.66902118e-01 -2.91694988e-01
+  4.71272158e-01 -6.58688994e-01  3.58721190e-01 -6.31384028e-01]
+Std Dev (per feature): [8.41150843e-02 9.30558465e-02 7.64217371e-02 3.01207790e-01
+ 1.68752407e-01 3.81312463e-01 1.88315934e-01 1.35938585e-01
+ 1.27190076e-01 8.13219363e-02 1.28997199e-01 3.86230390e-01
+ 4.22697746e-01 1.95018627e-01 1.25419287e-01 1.27571158e-01
+ 1.11657644e-01 2.26255072e-01 4.96890634e-01 5.54778687e-01
+ 2.10691249e-01 2.72390894e+01 3.36919586e+01 2.99269665e+01
+ 3.11606291e+01 9.47466504e+01 1.04259108e+02 5.29803705e+01
+ 2.15403658e+01 2.07759300e+01 2.28999786e+01 4.88340771e+01
+ 4.21390783e+01 6.79844443e+01 4.25712989e+01 1.65115469e+01
+ 1.27092097e+01 1.66703528e+01 3.65281002e+01 3.63177872e+01
+ 4.69357620e+01 3.33521370e+01 3.84270180e-02 2.75915025e-02
+ 3.99885816e-02 7.19829019e-02 1.74690574e-02 7.67462044e-02
+ 6.91694387e-02 2.35024428e-02 1.06625505e-02 2.02266857e-02
+ 1.89764371e-02 2.10720498e-02 3.00036889e-02 3.54502739e-02
+ 2.01582072e-03 4.22205308e-03 2.91305628e-03 9.20255799e-03
+ 8.94101098e-03 1.69297517e-02 5.63926898e-03 1.07488131e-01
+ 1.01736357e-01 3.15014594e+01 1.54846325e+01 2.21894590e-02
+ 1.85024939e-02 8.28200201e-01 2.25585901e-01 3.76731280e-01
+ 9.84416260e-01 4.77993404e+01 6.65874818e+01 3.47601858e-02
+ 1.63308100e-01 4.94922560e-02 2.13478547e-01 4.49970700e-02
+ 1.94804957e-01 1.42692800e+00 1.01248129e+00 1.12183877e+01
+ 1.68325494e+01 1.38378659e+00 1.80607591e+02 3.81581887e+05
+ 5.73774142e+05 3.31327769e+01 1.53163491e-01 3.05725655e-01
+ 2.23945626e-01 1.53759126e-01 1.83753774e-01 1.44310381e-01]
+
+Feature Normalization Complete.
+Scaled Training Features Shape: (188, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0          1.695291        -1.826285  ...      1.131562      drive
+1          1.869015        -2.687756  ...     -1.098302      drive
+2          1.911767        -1.837025  ...     -1.223611      drive
+3         -0.513312         0.206840  ...     -1.305540      drive
+4         -0.771624         0.975153  ...     -0.690994      drive
+
+[5 rows x 97 columns]
+
+--- 7. Dumping Final CSV ---
+✅ Successfully exported SCALED training features to: ./combined_final_features/A3_features_drive.csv
+✅ Successfully exported SCALED testing features to: ./combined_final_features/A3_validation_drive.csv
+| Pipeline for drive finished. Files saved to './combined_final_features'. |
+=======================================================
+Processing configurations for: lift
+
+=======================================================
+| STARTING PIPELINE for Shot Type: lift |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: lift
+Loaded: ./badminton_shots/lift_x30.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-10-20  12:57:49.357     -0.87836  ...   -0.21979     0.2121            4.0
+1  2025-10-20  12:57:49.457     -0.92269  ...   -0.21981     0.2121          104.0
+2  2025-10-20  12:57:49.557     -0.88339  ...   -0.22772     0.2121          204.0
+3  2025-10-20  12:57:49.657     -0.94872  ...   -0.23836     0.2121          304.0
+4  2025-10-20  12:57:49.757     -0.95963  ...   -0.23541     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 547 entries, 2025-10-20 12:57:49.357000 to 2025-10-20 12:58:43.965000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           547 non-null    object
+ 1   Time           547 non-null    object
+ 2   Accel_X (g)    547 non-null    float64
+ 3   Accel_Y (g)    547 non-null    float64
+ 4   Accel_Z (g)    547 non-null    float64
+ 5   Gyro_X (°/s)   547 non-null    float64
+ 6   Gyro_Y (°/s)   547 non-null    float64
+ 7   Gyro_Z (°/s)   547 non-null    float64
+ 8   Mag_X (G)      547 non-null    float64
+ 9   Mag_Y (G)      547 non-null    float64
+ 10  Mag_Z (G)      547 non-null    float64
+ 11  Timestamp (s)  547 non-null    float64
+ 12  shot_type      547 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 59.8+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 12:57:49.400  2025-10-20  12:57:49.357  ...            4.0       lift
+2025-10-20 12:57:49.500  2025-10-20  12:57:49.457  ...          104.0       lift
+2025-10-20 12:57:49.600  2025-10-20  12:57:49.557  ...          204.0       lift
+2025-10-20 12:57:49.700  2025-10-20  12:57:49.657  ...          304.0       lift
+2025-10-20 12:57:49.800  2025-10-20  12:57:49.757  ...          404.0       lift
+
+[5 rows x 13 columns]
+-0.44065518315018315
+0.11537951210998007
+0.21209999999999998
+2.7781027776516515e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 546 entries, 2025-10-20 12:57:49.400000 to 2025-10-20 12:58:43.900000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           546 non-null    object
+ 1   Time           546 non-null    object
+ 2   Accel_X (g)    546 non-null    float64
+ 3   Accel_Y (g)    546 non-null    float64
+ 4   Accel_Z (g)    546 non-null    float64
+ 5   Gyro_X (°/s)   546 non-null    float64
+ 6   Gyro_Y (°/s)   546 non-null    float64
+ 7   Gyro_Z (°/s)   546 non-null    float64
+ 8   Mag_X (G)      546 non-null    float64
+ 9   Mag_Y (G)      546 non-null    float64
+ 10  Mag_Z (G)      546 non-null    float64
+ 11  Timestamp (s)  546 non-null    float64
+ 12  shot_type      546 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 59.7+ KB
+column: Accel_X (g) mean: -0.7076814102564103 subtracted
+column: Accel_Y (g) mean: 0.34445155677655676 subtracted
+column: Accel_Z (g) mean: 0.12902166666666665 subtracted
+column: Gyro_X (°/s) mean: 8.972662271062271 subtracted
+column: Gyro_Y (°/s) mean: 67.79213514652014 subtracted
+column: Gyro_Z (°/s) mean: 56.79257641025641 subtracted
+column: Mag_X (G) mean: -0.44065518315018315 subtracted
+column: Mag_Y (G) mean: -0.1959046703296703 subtracted
+column: Mag_Z (G) mean: 0.21209999999999998 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 12:57:49.400  2025-10-20  12:57:49.357  ...            4.0       lift
+2025-10-20 12:57:49.500  2025-10-20  12:57:49.457  ...          104.0       lift
+2025-10-20 12:57:49.600  2025-10-20  12:57:49.557  ...          204.0       lift
+2025-10-20 12:57:49.700  2025-10-20  12:57:49.657  ...          304.0       lift
+2025-10-20 12:57:49.800  2025-10-20  12:57:49.757  ...          404.0       lift
+
+[5 rows x 13 columns]
+-8.133502011905909e-19
+0.11537951210998007
+2.7755575615628914e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 546 entries, 2025-10-20 12:57:49.400000 to 2025-10-20 12:58:43.900000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           546 non-null    object
+ 1   Time           546 non-null    object
+ 2   Accel_X (g)    546 non-null    float64
+ 3   Accel_Y (g)    546 non-null    float64
+ 4   Accel_Z (g)    546 non-null    float64
+ 5   Gyro_X (°/s)   546 non-null    float64
+ 6   Gyro_Y (°/s)   546 non-null    float64
+ 7   Gyro_Z (°/s)   546 non-null    float64
+ 8   Mag_X (G)      546 non-null    float64
+ 9   Mag_Y (G)      546 non-null    float64
+ 10  Mag_Z (G)      546 non-null    float64
+ 11  Timestamp (s)  546 non-null    float64
+ 12  shot_type      546 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 59.7+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 12:57:49.400  2025-10-20  12:57:49.357  ...            4.0       lift
+2025-10-20 12:57:49.500  2025-10-20  12:57:49.457  ...          104.0       lift
+2025-10-20 12:57:49.600  2025-10-20  12:57:49.557  ...          204.0       lift
+2025-10-20 12:57:49.700  2025-10-20  12:57:49.657  ...          304.0       lift
+2025-10-20 12:57:49.800  2025-10-20  12:57:49.757  ...          404.0       lift
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 546 entries, 2025-10-20 12:57:49.400000 to 2025-10-20 12:58:43.900000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           546 non-null    object
+ 1   Time           546 non-null    object
+ 2   Accel_X (g)    546 non-null    float64
+ 3   Accel_Y (g)    546 non-null    float64
+ 4   Accel_Z (g)    546 non-null    float64
+ 5   Gyro_X (°/s)   546 non-null    float64
+ 6   Gyro_Y (°/s)   546 non-null    float64
+ 7   Gyro_Z (°/s)   546 non-null    float64
+ 8   Mag_X (G)      546 non-null    float64
+ 9   Mag_Y (G)      546 non-null    float64
+ 10  Mag_Z (G)      546 non-null    float64
+ 11  Timestamp (s)  546 non-null    float64
+ 12  shot_type      546 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 59.7+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (436, 12)
+Shape of X_test: (110, 12)
+Shape of y_train: (436,)
+Shape of y_test: (110,)
+Creating windows for training set (Total Timesteps: 436).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 42 windows for the training set.
+Creating windows for validating set (Total Timesteps: 110).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 10 windows for the validating set.
+
+--- 4. Data Augmentation ---
+--- Starting Data Augmentation (Time Domain) ---
+Original Training Windows Shape: (42, 20, 9)
+[TimeDomainAug] Input shape: (42, 20, 9), Generating 3 augmented copies.
+--- Augmentation Pass #1 ---
+--- Augmentation Pass #2 ---
+--- Augmentation Pass #3 ---
+[TimeDomainAug] Output shape: X=(168, 20, 9), Y=(168,)
+--- Data Augmentation Complete ---
+NEW Total Training Windows Shape: (168, 20, 9)
+
+--- 5. Feature Extraction ---
+Feature extraction complete for training set. Final Feature DataFrame Shape: (168, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0          0.034420         0.313990  ...     -0.000842       lift
+1         -0.063738         0.573811  ...     -0.552441       lift
+2         -0.150656         0.602483  ...     -0.428719       lift
+3         -0.028160         0.606682  ...      0.371444       lift
+4         -0.033149         0.699910  ...      0.160313       lift
+
+[5 rows x 97 columns]
+Feature extraction complete for validating set. Final Feature DataFrame Shape: (10, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -0.255435         0.384015  ...      0.067814       lift
+1         -0.036000         0.491412  ...     -0.626608       lift
+2          0.050838         0.631207  ...     -0.751894       lift
+3         -0.109384         0.502283  ...     -0.170069       lift
+4         -0.211014         0.358755  ...     -0.134936       lift
+
+[5 rows x 97 columns]
+
+--- 6. Feature Normalization ---
+StandardScaler fitted successfully on training data.
+Mean (per feature): [ 1.75486615e-02  5.59304923e-01  2.91091341e-01 -1.06740499e+00
+  1.18662278e+00  2.25402778e+00  5.87489452e-01 -2.50566353e-03
+  1.59500848e+00  2.34050484e-01 -1.34363830e+00  4.26371236e+00
+  5.60735066e+00  9.43436707e-01  9.97676725e-04  4.28623514e-01
+  2.17952640e-01 -8.92156058e-01  9.39212447e-01  1.83136851e+00
+  4.09408231e-01  6.42498278e+00  1.72427279e+02  4.16153244e+01
+ -4.16230115e+02  3.52203951e+02  7.68434066e+02  8.79948879e+01
+ -3.33781327e+00  1.28910884e+02  4.98308622e+01 -2.28944932e+02
+  3.23515707e+02  5.52460639e+02  1.08836564e+02 -1.01991567e+00
+  1.68160021e+02  7.91321004e+01 -3.51581531e+02  3.53482301e+02
+  7.05063831e+02  1.64103228e+02  1.22970465e-03  1.13852226e-01
+  5.00239816e-02 -1.14995366e-01  2.79504911e-01  3.94500277e-01
+  1.38051822e-01  1.93376485e-03  1.81299626e-01  9.37785108e-02
+ -3.04669891e-01  4.06127367e-01  7.10797258e-01  1.85141665e-01
+  1.29395048e-04  7.53345408e-03  5.02699507e-03 -1.46469075e-02
+  1.45818891e-02  2.92287966e-02  9.98522646e-03  1.45492353e+00
+  1.02028100e+00  2.19804162e+02  1.73056329e+02  1.82149207e-01
+  1.20920819e-01  6.01190476e+00  2.37636147e+00  4.27321019e+00
+  6.16071429e+00  3.80569682e+02  6.19447249e+02 -1.20664222e-03
+  8.10842310e-01  8.67798343e-03  2.35348877e+00 -3.98421543e-03
+  6.27630633e-01  3.07142857e+00  7.77543557e+00  4.43024153e+01
+  1.08068911e+02  3.30357143e+00  1.40574497e+03  1.30035884e+06
+  3.18246381e+06  8.90052085e+01  1.33524801e-02 -2.23026118e-01
+  1.63587913e-01 -7.64120958e-01  5.11755058e-01 -3.41644382e-01]
+Std Dev (per feature): [1.03094038e-01 9.44247228e-02 1.17852946e-01 2.91332887e-01
+ 2.95556661e-01 4.02724223e-01 2.13795883e-01 2.66258668e-01
+ 2.87724270e-01 8.99186127e-02 1.69504074e-01 6.99670253e-01
+ 7.59265052e-01 6.36757710e-01 1.09798733e-01 7.52998153e-02
+ 5.41188117e-02 2.27397370e-01 2.57996878e-01 2.94204344e-01
+ 9.56959590e-02 2.55133694e+01 3.59441752e+01 1.87948411e+01
+ 9.91352691e+01 7.66968951e+01 1.32512943e+02 2.93349499e+01
+ 2.55262082e+01 2.76245020e+01 1.87688008e+01 8.70488867e+01
+ 8.16988058e+01 1.20712593e+02 2.95879245e+01 3.09062391e+01
+ 3.14150490e+01 3.13921137e+01 8.85349127e+01 1.09544633e+02
+ 1.48172181e+02 4.12715132e+01 2.36574515e-02 1.90775760e-02
+ 1.98245443e-02 1.27747530e-02 7.63005921e-02 7.76843180e-02
+ 5.41045662e-02 3.37314732e-02 2.98327387e-02 4.43218644e-02
+ 2.54244948e-02 8.66373252e-02 9.13412099e-02 7.88504580e-02
+ 1.97146587e-03 4.60797294e-03 3.25843320e-03 9.69345418e-03
+ 9.66557795e-03 1.81635106e-02 6.38110115e-03 1.72216340e-01
+ 2.10765939e-01 3.09409922e+01 2.75761856e+01 2.76786212e-02
+ 1.74405917e-02 9.63550572e-01 4.28999902e-01 7.78633698e-01
+ 8.40424759e-01 6.32554295e+01 6.69817674e+01 4.64923941e-02
+ 1.66632696e-01 1.14159740e-01 5.02819284e-01 3.35481759e-02
+ 1.41261211e-01 1.60661367e+00 1.99772955e+00 2.54126141e+01
+ 5.21001511e+01 1.30707292e+00 3.18969092e+02 8.61550528e+05
+ 1.60931328e+06 3.63700304e+01 2.74353260e-01 1.95920358e-01
+ 2.73771144e-01 1.31833561e-01 2.31797418e-01 2.42168061e-01]
+
+Feature Normalization Complete.
+Scaled Training Features Shape: (168, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0          0.163649        -2.597999  ...      1.407296       lift
+1         -0.788468         0.153628  ...     -0.870458       lift
+2         -1.631564         0.457274  ...     -0.359563       lift
+3         -0.443367         0.501749  ...      2.944600       lift
+4         -0.491761         1.489071  ...      2.072765       lift
+
+[5 rows x 97 columns]
+
+--- 7. Dumping Final CSV ---
+✅ Successfully exported SCALED training features to: ./combined_final_features/A3_features_lift.csv
+✅ Successfully exported SCALED testing features to: ./combined_final_features/A3_validation_lift.csv
+| Pipeline for lift finished. Files saved to './combined_final_features'. |
+=======================================================
+Processing configurations for: smash
+
+=======================================================
+| STARTING PIPELINE for Shot Type: smash |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: smash
+Loaded: ./badminton_shots/smash_x30.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-10-20  13:12:44.825      0.27791  ...   -0.29341     0.2121            4.0
+1  2025-10-20  13:12:44.925      0.30776  ...   -0.29041     0.2121          104.0
+2  2025-10-20  13:12:45.024      0.32272  ...   -0.28482     0.2121          204.0
+3  2025-10-20  13:12:45.125      0.39379  ...   -0.27526     0.2121          304.0
+4  2025-10-20  13:12:45.225      0.38390  ...   -0.26513     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 670 entries, 2025-10-20 13:12:44.825000 to 2025-10-20 13:13:51.729000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           670 non-null    object
+ 1   Time           670 non-null    object
+ 2   Accel_X (g)    670 non-null    float64
+ 3   Accel_Y (g)    670 non-null    float64
+ 4   Accel_Z (g)    670 non-null    float64
+ 5   Gyro_X (°/s)   670 non-null    float64
+ 6   Gyro_Y (°/s)   670 non-null    float64
+ 7   Gyro_Z (°/s)   670 non-null    float64
+ 8   Mag_X (G)      670 non-null    float64
+ 9   Mag_Y (G)      670 non-null    float64
+ 10  Mag_Z (G)      670 non-null    float64
+ 11  Timestamp (s)  670 non-null    float64
+ 12  shot_type      670 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 73.3+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 13:12:44.900  2025-10-20  13:12:44.825  ...            4.0      smash
+2025-10-20 13:12:45.000  2025-10-20  13:12:44.925  ...          104.0      smash
+2025-10-20 13:12:45.100  2025-10-20  13:12:45.024  ...          204.0      smash
+2025-10-20 13:12:45.200  2025-10-20  13:12:45.125  ...          304.0      smash
+2025-10-20 13:12:45.300  2025-10-20  13:12:45.225  ...          404.0      smash
+
+[5 rows x 13 columns]
+0.09612582959641254
+0.2532838485730996
+0.2121
+0.0
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 669 entries, 2025-10-20 13:12:44.900000 to 2025-10-20 13:13:51.700000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           669 non-null    object
+ 1   Time           669 non-null    object
+ 2   Accel_X (g)    669 non-null    float64
+ 3   Accel_Y (g)    669 non-null    float64
+ 4   Accel_Z (g)    669 non-null    float64
+ 5   Gyro_X (°/s)   669 non-null    float64
+ 6   Gyro_Y (°/s)   669 non-null    float64
+ 7   Gyro_Z (°/s)   669 non-null    float64
+ 8   Mag_X (G)      669 non-null    float64
+ 9   Mag_Y (G)      669 non-null    float64
+ 10  Mag_Z (G)      669 non-null    float64
+ 11  Timestamp (s)  669 non-null    float64
+ 12  shot_type      669 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 73.2+ KB
+column: Accel_X (g) mean: 0.6013407174887893 subtracted
+column: Accel_Y (g) mean: 0.9312607174887892 subtracted
+column: Accel_Z (g) mean: -0.6190353662182361 subtracted
+column: Gyro_X (°/s) mean: 83.58209605381167 subtracted
+column: Gyro_Y (°/s) mean: -94.2219193721973 subtracted
+column: Gyro_Z (°/s) mean: 64.9043500896861 subtracted
+column: Mag_X (G) mean: 0.09612582959641254 subtracted
+column: Mag_Y (G) mean: -0.1395578624813154 subtracted
+column: Mag_Z (G) mean: 0.2121 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 13:12:44.900  2025-10-20  13:12:44.825  ...            4.0      smash
+2025-10-20 13:12:45.000  2025-10-20  13:12:44.925  ...          104.0      smash
+2025-10-20 13:12:45.100  2025-10-20  13:12:45.024  ...          204.0      smash
+2025-10-20 13:12:45.200  2025-10-20  13:12:45.125  ...          304.0      smash
+2025-10-20 13:12:45.300  2025-10-20  13:12:45.225  ...          404.0      smash
+
+[5 rows x 13 columns]
+1.92505038649504e-17
+0.2532838485730996
+0.0
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 669 entries, 2025-10-20 13:12:44.900000 to 2025-10-20 13:13:51.700000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           669 non-null    object
+ 1   Time           669 non-null    object
+ 2   Accel_X (g)    669 non-null    float64
+ 3   Accel_Y (g)    669 non-null    float64
+ 4   Accel_Z (g)    669 non-null    float64
+ 5   Gyro_X (°/s)   669 non-null    float64
+ 6   Gyro_Y (°/s)   669 non-null    float64
+ 7   Gyro_Z (°/s)   669 non-null    float64
+ 8   Mag_X (G)      669 non-null    float64
+ 9   Mag_Y (G)      669 non-null    float64
+ 10  Mag_Z (G)      669 non-null    float64
+ 11  Timestamp (s)  669 non-null    float64
+ 12  shot_type      669 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 73.2+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 13:12:44.900  2025-10-20  13:12:44.825  ...            4.0      smash
+2025-10-20 13:12:45.000  2025-10-20  13:12:44.925  ...          104.0      smash
+2025-10-20 13:12:45.100  2025-10-20  13:12:45.024  ...          204.0      smash
+2025-10-20 13:12:45.200  2025-10-20  13:12:45.125  ...          304.0      smash
+2025-10-20 13:12:45.300  2025-10-20  13:12:45.225  ...          404.0      smash
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 669 entries, 2025-10-20 13:12:44.900000 to 2025-10-20 13:13:51.700000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           669 non-null    object
+ 1   Time           669 non-null    object
+ 2   Accel_X (g)    669 non-null    float64
+ 3   Accel_Y (g)    669 non-null    float64
+ 4   Accel_Z (g)    669 non-null    float64
+ 5   Gyro_X (°/s)   669 non-null    float64
+ 6   Gyro_Y (°/s)   669 non-null    float64
+ 7   Gyro_Z (°/s)   669 non-null    float64
+ 8   Mag_X (G)      669 non-null    float64
+ 9   Mag_Y (G)      669 non-null    float64
+ 10  Mag_Z (G)      669 non-null    float64
+ 11  Timestamp (s)  669 non-null    float64
+ 12  shot_type      669 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 73.2+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (535, 12)
+Shape of X_test: (134, 12)
+Shape of y_train: (535,)
+Shape of y_test: (134,)
+Creating windows for training set (Total Timesteps: 535).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 52 windows for the training set.
+Creating windows for validating set (Total Timesteps: 134).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 12 windows for the validating set.
+
+--- 4. Data Augmentation ---
+--- Starting Data Augmentation (Time Domain) ---
+Original Training Windows Shape: (52, 20, 9)
+[TimeDomainAug] Input shape: (52, 20, 9), Generating 3 augmented copies.
+--- Augmentation Pass #1 ---
+--- Augmentation Pass #2 ---
+--- Augmentation Pass #3 ---
+[TimeDomainAug] Output shape: X=(208, 20, 9), Y=(208,)
+--- Data Augmentation Complete ---
+NEW Total Training Windows Shape: (208, 20, 9)
+
+--- 5. Feature Extraction ---
+Feature extraction complete for training set. Final Feature DataFrame Shape: (208, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -0.071987         0.631785  ...     -0.241813      smash
+1          0.087543         0.706926  ...     -0.386926      smash
+2          0.011109         0.688146  ...     -0.036638      smash
+3         -0.164181         0.560564  ...      0.203072      smash
+4          0.031404         0.569502  ...      0.347981      smash
+
+[5 rows x 97 columns]
+Feature extraction complete for validating set. Final Feature DataFrame Shape: (12, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0          0.182481         0.598907  ...     -0.290705      smash
+1          0.090713         0.460433  ...     -0.360032      smash
+2          0.031791         0.257887  ...      0.616802      smash
+3          0.060532         0.354838  ...     -0.064929      smash
+4          0.202124         0.590289  ...     -0.356462      smash
+
+[5 rows x 97 columns]
+
+--- 6. Feature Normalization ---
+StandardScaler fitted successfully on training data.
+Mean (per feature): [-9.08692793e-03  6.76401464e-01  3.01330275e-01 -1.62573068e+00
+  1.37392207e+00  2.99965275e+00  5.95402660e-01  9.37389875e-02
+  2.34667121e+00  5.21586011e-01 -1.80331739e+00  5.41836339e+00
+  7.22168078e+00  2.41517716e+00 -6.33400262e-03  5.22218097e-01
+  2.76871510e-01 -9.71366171e-01  1.28898397e+00  2.26035014e+00
+  5.46733238e-01  2.49712346e+00  1.29068774e+02  5.52592529e+01
+ -1.81154483e+02  3.21060080e+02  5.02214563e+02  1.38256057e+02
+ -5.14647178e+00  2.47859253e+02  8.59266189e+01 -6.60259231e+02
+  4.46197473e+02  1.10645670e+03  1.74772644e+02  5.11260718e+00
+  1.73715857e+02  4.87616823e+01 -2.18205939e+02  5.05155009e+02
+  7.23360948e+02  1.26034808e+02 -8.14059142e-03  2.41628420e-01
+  8.02507829e-02 -5.90939380e-01  2.20085175e-01  8.11024555e-01
+  2.54613897e-01  7.16567549e-03  2.08688654e-01  8.19283952e-02
+ -2.20931847e-01  4.58857995e-01  6.79789842e-01  2.62646034e-01
+ -2.90162587e-04  7.61964051e-03  5.06974576e-03 -1.48292801e-02
+  1.46533377e-02  2.94826178e-02  9.92823443e-03  2.16978130e+00
+  1.35552095e+00  2.71963533e+02  2.06278130e+02  2.91806994e-01
+  1.54343449e-01  5.85096154e+00  3.44854484e+00  5.50701167e+00
+  5.81250000e+00  4.66511990e+02  7.38108693e+02  5.23977973e-03
+  9.72189635e-01  2.16429364e-02  3.43306977e+00 -3.81143822e-03
+  7.32289519e-01  2.68990385e+00  1.01675680e+01  6.52856041e+01
+  2.15938932e+02  2.96394231e+00  1.57402717e+03  1.72568884e+06
+  4.74176948e+06  1.29311178e+02 -4.93380946e-01  3.90645774e-02
+  2.39135300e-01  2.31119422e-01  5.62336415e-01 -7.68686625e-02]
+Std Dev (per feature): [1.62620960e-01 1.38797547e-01 1.14014279e-01 4.62381425e-01
+ 4.22240840e-01 6.07754964e-01 2.56958467e-01 4.92832951e-01
+ 3.48554402e-01 5.30212751e-01 1.85923772e-01 7.54348756e-01
+ 8.34291123e-01 1.53474905e+00 1.45861925e-01 1.23327328e-01
+ 8.68266037e-02 3.44192696e-01 5.80599334e-01 5.77172507e-01
+ 1.66063211e-01 3.16271450e+01 2.68470977e+01 2.57871414e+01
+ 8.19908207e+01 6.41713276e+01 1.02338487e+02 5.76455807e+01
+ 4.84487599e+01 5.05371726e+01 3.73639669e+01 1.48360222e+02
+ 1.21108054e+02 1.99339965e+02 7.53587693e+01 4.11456011e+01
+ 5.37723260e+01 1.48343452e+01 1.03726050e+02 1.67898185e+02
+ 2.04344522e+02 5.69914271e+01 5.55592670e-02 4.84245250e-02
+ 3.98989646e-02 1.06154641e-01 2.34495144e-02 1.07737188e-01
+ 1.42165627e-01 4.83294686e-02 3.28012261e-02 4.27762149e-02
+ 3.35695833e-02 5.64218557e-02 7.39839984e-02 1.38143231e-01
+ 1.88927718e-03 4.64462811e-03 3.37791926e-03 1.00978301e-02
+ 9.55147132e-03 1.85182508e-02 6.47518934e-03 2.88989637e-01
+ 2.52335721e-01 4.32288723e+01 3.39441647e+01 3.69299401e-02
+ 2.53482001e-02 9.20858211e-01 6.40507687e-01 7.51801975e-01
+ 9.79814298e-01 8.34676074e+01 8.86606850e+01 6.68375105e-02
+ 2.16028620e-01 1.99812962e-01 5.57849678e-01 4.10269280e-02
+ 1.97903154e-01 1.32967029e+00 2.27151773e+00 4.14719689e+01
+ 9.18994812e+01 1.24996071e+00 3.49958789e+02 1.06357656e+06
+ 2.08201457e+06 6.06311636e+01 1.89416190e-01 3.43979550e-01
+ 3.80279182e-01 3.03717266e-01 2.07049904e-01 2.31625441e-01]
+
+Feature Normalization Complete.
+Scaled Training Features Shape: (208, 97)
+   Accel_X (g)_mean  Accel_X (g)_std  ...  gyro_corr_yz  shot_type
+0         -0.386790        -0.321448  ...     -0.712115      smash
+1          0.594202         0.219920  ...     -1.338614      smash
+2          0.124188         0.084617  ...      0.173689      smash
+3         -0.953718        -0.834575  ...      1.208591      smash
+4          0.248992        -0.770182  ...      1.834211      smash
+
+[5 rows x 97 columns]
+
+--- 7. Dumping Final CSV ---
+✅ Successfully exported SCALED training features to: ./combined_final_features/A3_features_smash.csv
+✅ Successfully exported SCALED testing features to: ./combined_final_features/A3_validation_smash.csv
+| Pipeline for smash finished. Files saved to './combined_final_features'. |
+=======================================================
+
+--- FINAL COMBINATION COMPLETE ---
+Total Combined Training Features Shape: (1060, 97)
+Total Combined Validation Features Shape: (59, 97)
+Detected Classes: ['clear' 'drive' 'lift' 'smash']
+Input Features: 96, Output Classes: 4
+/Users/aimery/repos/machine_learning/machine_learning/venv/lib/python3.9/site-packages/keras/src/layers/core/dense.py:93: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+
+--- Model Training Starting ---
+Epoch 1/50
+34/34 - 1s - 21ms/step - accuracy: 0.2802 - loss: 1.5397 - val_accuracy: 0.2712 - val_loss: 1.4282
+Epoch 2/50
+34/34 - 0s - 1ms/step - accuracy: 0.3660 - loss: 1.3284 - val_accuracy: 0.3559 - val_loss: 1.3123
+Epoch 3/50
+34/34 - 0s - 1ms/step - accuracy: 0.4613 - loss: 1.2045 - val_accuracy: 0.3390 - val_loss: 1.3178
+Epoch 4/50
+34/34 - 0s - 1ms/step - accuracy: 0.5443 - loss: 1.0860 - val_accuracy: 0.3051 - val_loss: 1.2963
+Epoch 5/50
+34/34 - 0s - 1ms/step - accuracy: 0.5915 - loss: 1.0022 - val_accuracy: 0.4576 - val_loss: 1.2256
+Epoch 6/50
+34/34 - 0s - 1ms/step - accuracy: 0.6519 - loss: 0.9167 - val_accuracy: 0.5085 - val_loss: 1.1591
+Epoch 7/50
+34/34 - 0s - 1ms/step - accuracy: 0.6783 - loss: 0.8250 - val_accuracy: 0.5593 - val_loss: 1.0894
+Epoch 8/50
+34/34 - 0s - 1ms/step - accuracy: 0.7217 - loss: 0.7581 - val_accuracy: 0.5763 - val_loss: 1.0821
+Epoch 9/50
+34/34 - 0s - 1ms/step - accuracy: 0.7623 - loss: 0.6858 - val_accuracy: 0.5932 - val_loss: 1.0320
+Epoch 10/50
+34/34 - 0s - 1ms/step - accuracy: 0.7915 - loss: 0.5904 - val_accuracy: 0.5932 - val_loss: 1.0726
+Epoch 11/50
+34/34 - 0s - 1ms/step - accuracy: 0.8104 - loss: 0.5463 - val_accuracy: 0.5763 - val_loss: 1.0753
+Epoch 12/50
+34/34 - 0s - 1ms/step - accuracy: 0.8349 - loss: 0.5024 - val_accuracy: 0.5932 - val_loss: 1.0666
+Epoch 13/50
+34/34 - 0s - 1ms/step - accuracy: 0.8604 - loss: 0.4243 - val_accuracy: 0.5763 - val_loss: 1.0960
+Epoch 14/50
+34/34 - 0s - 1ms/step - accuracy: 0.8660 - loss: 0.4068 - val_accuracy: 0.5763 - val_loss: 1.1507
+Epoch 15/50
+34/34 - 0s - 1ms/step - accuracy: 0.8651 - loss: 0.3760 - val_accuracy: 0.5763 - val_loss: 1.1578
+Epoch 16/50
+34/34 - 0s - 1ms/step - accuracy: 0.8925 - loss: 0.3466 - val_accuracy: 0.6102 - val_loss: 1.1118
+Epoch 17/50
+34/34 - 0s - 1ms/step - accuracy: 0.9104 - loss: 0.2888 - val_accuracy: 0.6102 - val_loss: 1.1749
+Epoch 18/50
+34/34 - 0s - 1ms/step - accuracy: 0.9009 - loss: 0.2957 - val_accuracy: 0.6102 - val_loss: 1.1870
+Epoch 19/50
+34/34 - 0s - 1ms/step - accuracy: 0.9274 - loss: 0.2449 - val_accuracy: 0.5932 - val_loss: 1.1698
+Epoch 20/50
+34/34 - 0s - 1ms/step - accuracy: 0.9104 - loss: 0.2580 - val_accuracy: 0.6271 - val_loss: 1.0566
+Epoch 21/50
+34/34 - 0s - 1ms/step - accuracy: 0.9311 - loss: 0.2154 - val_accuracy: 0.6102 - val_loss: 1.1369
+Epoch 22/50
+34/34 - 0s - 1ms/step - accuracy: 0.9368 - loss: 0.1970 - val_accuracy: 0.6102 - val_loss: 1.1402
+Epoch 23/50
+34/34 - 0s - 1ms/step - accuracy: 0.9481 - loss: 0.1850 - val_accuracy: 0.6271 - val_loss: 1.0574
+Epoch 24/50
+34/34 - 0s - 1ms/step - accuracy: 0.9491 - loss: 0.1854 - val_accuracy: 0.6271 - val_loss: 1.1356
+Epoch 25/50
+34/34 - 0s - 1ms/step - accuracy: 0.9575 - loss: 0.1502 - val_accuracy: 0.6102 - val_loss: 1.1794
+Epoch 26/50
+34/34 - 0s - 1ms/step - accuracy: 0.9387 - loss: 0.1737 - val_accuracy: 0.6102 - val_loss: 1.1544
+Epoch 27/50
+34/34 - 0s - 1ms/step - accuracy: 0.9623 - loss: 0.1517 - val_accuracy: 0.6102 - val_loss: 1.1839
+Epoch 28/50
+34/34 - 0s - 1ms/step - accuracy: 0.9679 - loss: 0.1157 - val_accuracy: 0.6441 - val_loss: 1.2193
+Epoch 29/50
+34/34 - 0s - 1ms/step - accuracy: 0.9500 - loss: 0.1416 - val_accuracy: 0.6271 - val_loss: 1.1496
+Epoch 30/50
+34/34 - 0s - 1ms/step - accuracy: 0.9651 - loss: 0.1163 - val_accuracy: 0.6102 - val_loss: 1.2000
+Epoch 31/50
+34/34 - 0s - 1ms/step - accuracy: 0.9670 - loss: 0.1078 - val_accuracy: 0.6102 - val_loss: 1.2862
+Epoch 32/50
+34/34 - 0s - 1ms/step - accuracy: 0.9642 - loss: 0.1103 - val_accuracy: 0.6271 - val_loss: 1.1991
+Epoch 33/50
+34/34 - 0s - 1ms/step - accuracy: 0.9708 - loss: 0.0997 - val_accuracy: 0.6610 - val_loss: 1.1625
+Epoch 34/50
+34/34 - 0s - 1ms/step - accuracy: 0.9726 - loss: 0.1033 - val_accuracy: 0.6441 - val_loss: 1.2382
+Epoch 35/50
+34/34 - 0s - 1ms/step - accuracy: 0.9651 - loss: 0.0926 - val_accuracy: 0.5932 - val_loss: 1.3025
+Epoch 36/50
+34/34 - 0s - 1ms/step - accuracy: 0.9792 - loss: 0.0790 - val_accuracy: 0.6271 - val_loss: 1.3268
+Epoch 37/50
+34/34 - 0s - 1ms/step - accuracy: 0.9623 - loss: 0.1129 - val_accuracy: 0.6271 - val_loss: 1.3148
+Epoch 38/50
+34/34 - 0s - 1ms/step - accuracy: 0.9774 - loss: 0.0736 - val_accuracy: 0.6271 - val_loss: 1.2768
+Epoch 39/50
+34/34 - 0s - 1ms/step - accuracy: 0.9679 - loss: 0.0963 - val_accuracy: 0.6441 - val_loss: 1.4908
+Epoch 40/50
+34/34 - 0s - 1ms/step - accuracy: 0.9802 - loss: 0.0744 - val_accuracy: 0.5763 - val_loss: 1.5069
+Epoch 41/50
+34/34 - 0s - 1ms/step - accuracy: 0.9792 - loss: 0.0768 - val_accuracy: 0.6441 - val_loss: 1.3843
+Epoch 42/50
+34/34 - 0s - 1ms/step - accuracy: 0.9792 - loss: 0.0679 - val_accuracy: 0.6610 - val_loss: 1.3267
+Epoch 43/50
+34/34 - 0s - 1ms/step - accuracy: 0.9755 - loss: 0.0813 - val_accuracy: 0.6610 - val_loss: 1.3254
+Epoch 44/50
+34/34 - 0s - 1ms/step - accuracy: 0.9708 - loss: 0.0887 - val_accuracy: 0.6441 - val_loss: 1.2308
+Epoch 45/50
+34/34 - 0s - 1ms/step - accuracy: 0.9830 - loss: 0.0599 - val_accuracy: 0.6949 - val_loss: 1.2502
+Epoch 46/50
+34/34 - 0s - 1ms/step - accuracy: 0.9802 - loss: 0.0525 - val_accuracy: 0.6441 - val_loss: 1.4105
+Epoch 47/50
+34/34 - 0s - 1ms/step - accuracy: 0.9811 - loss: 0.0620 - val_accuracy: 0.6610 - val_loss: 1.3442
+Epoch 48/50
+34/34 - 0s - 1ms/step - accuracy: 0.9755 - loss: 0.0684 - val_accuracy: 0.6441 - val_loss: 1.3558
+Epoch 49/50
+34/34 - 0s - 1ms/step - accuracy: 0.9840 - loss: 0.0515 - val_accuracy: 0.6271 - val_loss: 1.4375
+Epoch 50/50
+34/34 - 0s - 1ms/step - accuracy: 0.9792 - loss: 0.0602 - val_accuracy: 0.6441 - val_loss: 1.4037
+--- Model Training Finished ---
+
+--- Classification Report (Accuracy & Macro F1) ---
+              precision    recall  f1-score   support
+
+       clear       0.60      0.64      0.62        14
+       drive       0.69      0.64      0.67        14
+        lift       0.80      0.80      0.80        15
+       smash       0.50      0.50      0.50        16
+
+    accuracy                           0.64        59
+   macro avg       0.65      0.65      0.65        59
+weighted avg       0.65      0.64      0.64        59
+
+Overall Test Accuracy: 0.6441
+
+--- Confusion Matrix ---
+[[ 9  0  0  5]
+ [ 0  9  2  3]
+ [ 0  3 12  0]
+ [ 6  1  1  8]]
+
+Process finished with exit code 0
+
+
+
+
+/Users/aimery/repos/machine_learning/machine_learning/venv/bin/python /Users/aimery/repos/machine_learning/machine_learning/assignment4/Transformer_training.py
+
+========== Running Transformer Sequence Model Training ==========
+
+Processing: clear
+
+=======================================================
+| STARTING PIPELINE for Shot Type: clear |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: clear
+Loaded: ./new_10_kyle/clear_10_kyle.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-11-05  13:16:11.041     -0.08376  ...   -0.48505     0.2121            4.0
+1  2025-11-05  13:16:11.140     -0.07773  ...   -0.48527     0.2121          104.0
+2  2025-11-05  13:16:11.240     -0.09025  ...   -0.48581     0.2121          204.0
+3  2025-11-05  13:16:11.341     -0.08967  ...   -0.48550     0.2121          304.0
+4  2025-11-05  13:16:11.441     -0.07949  ...   -0.48480     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 238 entries, 2025-11-05 13:16:11.041000 to 2025-11-05 13:16:34.740000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           238 non-null    object
+ 1   Time           238 non-null    object
+ 2   Accel_X (g)    238 non-null    float64
+ 3   Accel_Y (g)    238 non-null    float64
+ 4   Accel_Z (g)    238 non-null    float64
+ 5   Gyro_X (°/s)   238 non-null    float64
+ 6   Gyro_Y (°/s)   238 non-null    float64
+ 7   Gyro_Z (°/s)   238 non-null    float64
+ 8   Mag_X (G)      238 non-null    float64
+ 9   Mag_Y (G)      238 non-null    float64
+ 10  Mag_Z (G)      238 non-null    float64
+ 11  Timestamp (s)  238 non-null    float64
+ 12  shot_type      238 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 26.0+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:16:11.100  2025-11-05  13:16:11.041  ...            4.0      clear
+2025-11-05 13:16:11.200  2025-11-05  13:16:11.140  ...          104.0      clear
+2025-11-05 13:16:11.300  2025-11-05  13:16:11.240  ...          204.0      clear
+2025-11-05 13:16:11.400  2025-11-05  13:16:11.341  ...          304.0      clear
+2025-11-05 13:16:11.500  2025-11-05  13:16:11.441  ...          404.0      clear
+
+[5 rows x 13 columns]
+0.0013933333333333304
+0.09437160690648959
+0.21209999999999996
+5.562863528062607e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 237 entries, 2025-11-05 13:16:11.100000 to 2025-11-05 13:16:34.700000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           237 non-null    object
+ 1   Time           237 non-null    object
+ 2   Accel_X (g)    237 non-null    float64
+ 3   Accel_Y (g)    237 non-null    float64
+ 4   Accel_Z (g)    237 non-null    float64
+ 5   Gyro_X (°/s)   237 non-null    float64
+ 6   Gyro_Y (°/s)   237 non-null    float64
+ 7   Gyro_Z (°/s)   237 non-null    float64
+ 8   Mag_X (G)      237 non-null    float64
+ 9   Mag_Y (G)      237 non-null    float64
+ 10  Mag_Z (G)      237 non-null    float64
+ 11  Timestamp (s)  237 non-null    float64
+ 12  shot_type      237 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 25.9+ KB
+column: Accel_X (g) mean: -0.004649156118143461 subtracted
+column: Accel_Y (g) mean: -0.142180970464135 subtracted
+column: Accel_Z (g) mean: -0.5104267510548522 subtracted
+column: Gyro_X (°/s) mean: -9.597619873417722 subtracted
+column: Gyro_Y (°/s) mean: -26.672198101265824 subtracted
+column: Gyro_Z (°/s) mean: -27.1429146835443 subtracted
+column: Mag_X (G) mean: 0.0013933333333333304 subtracted
+column: Mag_Y (G) mean: -0.3570805485232067 subtracted
+column: Mag_Z (G) mean: 0.21209999999999996 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:16:11.100  2025-11-05  13:16:11.041  ...            4.0      clear
+2025-11-05 13:16:11.200  2025-11-05  13:16:11.140  ...          104.0      clear
+2025-11-05 13:16:11.300  2025-11-05  13:16:11.240  ...          204.0      clear
+2025-11-05 13:16:11.400  2025-11-05  13:16:11.341  ...          304.0      clear
+2025-11-05 13:16:11.500  2025-11-05  13:16:11.441  ...          404.0      clear
+
+[5 rows x 13 columns]
+3.7475882687768994e-18
+0.09437160690648959
+5.551115123125783e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 237 entries, 2025-11-05 13:16:11.100000 to 2025-11-05 13:16:34.700000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           237 non-null    object
+ 1   Time           237 non-null    object
+ 2   Accel_X (g)    237 non-null    float64
+ 3   Accel_Y (g)    237 non-null    float64
+ 4   Accel_Z (g)    237 non-null    float64
+ 5   Gyro_X (°/s)   237 non-null    float64
+ 6   Gyro_Y (°/s)   237 non-null    float64
+ 7   Gyro_Z (°/s)   237 non-null    float64
+ 8   Mag_X (G)      237 non-null    float64
+ 9   Mag_Y (G)      237 non-null    float64
+ 10  Mag_Z (G)      237 non-null    float64
+ 11  Timestamp (s)  237 non-null    float64
+ 12  shot_type      237 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 25.9+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:16:11.100  2025-11-05  13:16:11.041  ...            4.0      clear
+2025-11-05 13:16:11.200  2025-11-05  13:16:11.140  ...          104.0      clear
+2025-11-05 13:16:11.300  2025-11-05  13:16:11.240  ...          204.0      clear
+2025-11-05 13:16:11.400  2025-11-05  13:16:11.341  ...          304.0      clear
+2025-11-05 13:16:11.500  2025-11-05  13:16:11.441  ...          404.0      clear
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 237 entries, 2025-11-05 13:16:11.100000 to 2025-11-05 13:16:34.700000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           237 non-null    object
+ 1   Time           237 non-null    object
+ 2   Accel_X (g)    237 non-null    float64
+ 3   Accel_Y (g)    237 non-null    float64
+ 4   Accel_Z (g)    237 non-null    float64
+ 5   Gyro_X (°/s)   237 non-null    float64
+ 6   Gyro_Y (°/s)   237 non-null    float64
+ 7   Gyro_Z (°/s)   237 non-null    float64
+ 8   Mag_X (G)      237 non-null    float64
+ 9   Mag_Y (G)      237 non-null    float64
+ 10  Mag_Z (G)      237 non-null    float64
+ 11  Timestamp (s)  237 non-null    float64
+ 12  shot_type      237 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 25.9+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (189, 12)
+Shape of X_test: (48, 12)
+Shape of y_train: (189,)
+Shape of y_test: (48,)
+Creating windows for training set (Total Timesteps: 189).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 17 windows for the training set.
+Creating windows for validating set (Total Timesteps: 48).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 3 windows for the validating set.
+| Pipeline for clear finished. Data saved to Matrices'(17, 20, 9) (17,)' '(3, 20, 9) (3,)' . |
+=======================================================
+Processing: drive
+
+=======================================================
+| STARTING PIPELINE for Shot Type: drive |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: drive
+Loaded: ./new_10_kyle/drive_10_kyle.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-11-05  13:16:48.776      0.04947  ...   -0.44213     0.2121            4.0
+1  2025-11-05  13:16:48.876      0.04615  ...   -0.44215     0.2121          104.0
+2  2025-11-05  13:16:48.976      0.04369  ...   -0.44213     0.2121          204.0
+3  2025-11-05  13:16:49.076      0.05651  ...   -0.44191     0.2121          304.0
+4  2025-11-05  13:16:49.176      0.07358  ...   -0.44188     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 229 entries, 2025-11-05 13:16:48.776000 to 2025-11-05 13:17:11.580000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           229 non-null    object
+ 1   Time           229 non-null    object
+ 2   Accel_X (g)    229 non-null    float64
+ 3   Accel_Y (g)    229 non-null    float64
+ 4   Accel_Z (g)    229 non-null    float64
+ 5   Gyro_X (°/s)   229 non-null    float64
+ 6   Gyro_Y (°/s)   229 non-null    float64
+ 7   Gyro_Z (°/s)   229 non-null    float64
+ 8   Mag_X (G)      229 non-null    float64
+ 9   Mag_Y (G)      229 non-null    float64
+ 10  Mag_Z (G)      229 non-null    float64
+ 11  Timestamp (s)  229 non-null    float64
+ 12  shot_type      229 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 25.0+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:16:48.800  2025-11-05  13:16:48.776  ...            4.0      drive
+2025-11-05 13:16:48.900  2025-11-05  13:16:48.876  ...          104.0      drive
+2025-11-05 13:16:49.000  2025-11-05  13:16:48.976  ...          204.0      drive
+2025-11-05 13:16:49.100  2025-11-05  13:16:49.076  ...          304.0      drive
+2025-11-05 13:16:49.200  2025-11-05  13:16:49.176  ...          404.0      drive
+
+[5 rows x 13 columns]
+-0.006436096491228071
+0.08576360643968577
+0.21209999999999998
+2.7816644062647093e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 228 entries, 2025-11-05 13:16:48.800000 to 2025-11-05 13:17:11.500000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           228 non-null    object
+ 1   Time           228 non-null    object
+ 2   Accel_X (g)    228 non-null    float64
+ 3   Accel_Y (g)    228 non-null    float64
+ 4   Accel_Z (g)    228 non-null    float64
+ 5   Gyro_X (°/s)   228 non-null    float64
+ 6   Gyro_Y (°/s)   228 non-null    float64
+ 7   Gyro_Z (°/s)   228 non-null    float64
+ 8   Mag_X (G)      228 non-null    float64
+ 9   Mag_Y (G)      228 non-null    float64
+ 10  Mag_Z (G)      228 non-null    float64
+ 11  Timestamp (s)  228 non-null    float64
+ 12  shot_type      228 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 24.9+ KB
+column: Accel_X (g) mean: -0.03938934210526317 subtracted
+column: Accel_Y (g) mean: -0.7012449122807018 subtracted
+column: Accel_Z (g) mean: -0.3091499122807017 subtracted
+column: Gyro_X (°/s) mean: -3.14636298245614 subtracted
+column: Gyro_Y (°/s) mean: -1.91943451754386 subtracted
+column: Gyro_Z (°/s) mean: -7.85054153508772 subtracted
+column: Mag_X (G) mean: -0.006436096491228071 subtracted
+column: Mag_Y (G) mean: -0.4198540350877193 subtracted
+column: Mag_Z (G) mean: 0.21209999999999998 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:16:48.800  2025-11-05  13:16:48.776  ...            4.0      drive
+2025-11-05 13:16:48.900  2025-11-05  13:16:48.876  ...          104.0      drive
+2025-11-05 13:16:49.000  2025-11-05  13:16:48.976  ...          204.0      drive
+2025-11-05 13:16:49.100  2025-11-05  13:16:49.076  ...          304.0      drive
+2025-11-05 13:16:49.200  2025-11-05  13:16:49.176  ...          404.0      drive
+
+[5 rows x 13 columns]
+-1.947759692324836e-18
+0.08576360643968577
+2.7755575615628914e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 228 entries, 2025-11-05 13:16:48.800000 to 2025-11-05 13:17:11.500000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           228 non-null    object
+ 1   Time           228 non-null    object
+ 2   Accel_X (g)    228 non-null    float64
+ 3   Accel_Y (g)    228 non-null    float64
+ 4   Accel_Z (g)    228 non-null    float64
+ 5   Gyro_X (°/s)   228 non-null    float64
+ 6   Gyro_Y (°/s)   228 non-null    float64
+ 7   Gyro_Z (°/s)   228 non-null    float64
+ 8   Mag_X (G)      228 non-null    float64
+ 9   Mag_Y (G)      228 non-null    float64
+ 10  Mag_Z (G)      228 non-null    float64
+ 11  Timestamp (s)  228 non-null    float64
+ 12  shot_type      228 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 24.9+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:16:48.800  2025-11-05  13:16:48.776  ...            4.0      drive
+2025-11-05 13:16:48.900  2025-11-05  13:16:48.876  ...          104.0      drive
+2025-11-05 13:16:49.000  2025-11-05  13:16:48.976  ...          204.0      drive
+2025-11-05 13:16:49.100  2025-11-05  13:16:49.076  ...          304.0      drive
+2025-11-05 13:16:49.200  2025-11-05  13:16:49.176  ...          404.0      drive
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 228 entries, 2025-11-05 13:16:48.800000 to 2025-11-05 13:17:11.500000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           228 non-null    object
+ 1   Time           228 non-null    object
+ 2   Accel_X (g)    228 non-null    float64
+ 3   Accel_Y (g)    228 non-null    float64
+ 4   Accel_Z (g)    228 non-null    float64
+ 5   Gyro_X (°/s)   228 non-null    float64
+ 6   Gyro_Y (°/s)   228 non-null    float64
+ 7   Gyro_Z (°/s)   228 non-null    float64
+ 8   Mag_X (G)      228 non-null    float64
+ 9   Mag_Y (G)      228 non-null    float64
+ 10  Mag_Z (G)      228 non-null    float64
+ 11  Timestamp (s)  228 non-null    float64
+ 12  shot_type      228 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 24.9+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (182, 12)
+Shape of X_test: (46, 12)
+Shape of y_train: (182,)
+Shape of y_test: (46,)
+Creating windows for training set (Total Timesteps: 182).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 17 windows for the training set.
+Creating windows for validating set (Total Timesteps: 46).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 3 windows for the validating set.
+| Pipeline for drive finished. Data saved to Matrices'(17, 20, 9) (17,)' '(3, 20, 9) (3,)' . |
+=======================================================
+Processing: lift
+
+=======================================================
+| STARTING PIPELINE for Shot Type: lift |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: lift
+Loaded: ./new_10_kyle/lift_10_kyle.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-11-05  13:14:07.164      0.12209  ...   -0.42420     0.2121            4.0
+1  2025-11-05  13:14:07.265      0.12451  ...   -0.42395     0.2121          104.0
+2  2025-11-05  13:14:07.365      0.13949  ...   -0.42397     0.2121          204.0
+3  2025-11-05  13:14:07.465      0.13790  ...   -0.42420     0.2121          304.0
+4  2025-11-05  13:14:07.565      0.13286  ...   -0.42397     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 313 entries, 2025-11-05 13:14:07.164000 to 2025-11-05 13:14:38.365000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           313 non-null    object
+ 1   Time           313 non-null    object
+ 2   Accel_X (g)    313 non-null    float64
+ 3   Accel_Y (g)    313 non-null    float64
+ 4   Accel_Z (g)    313 non-null    float64
+ 5   Gyro_X (°/s)   313 non-null    float64
+ 6   Gyro_Y (°/s)   313 non-null    float64
+ 7   Gyro_Z (°/s)   313 non-null    float64
+ 8   Mag_X (G)      313 non-null    float64
+ 9   Mag_Y (G)      313 non-null    float64
+ 10  Mag_Z (G)      313 non-null    float64
+ 11  Timestamp (s)  313 non-null    float64
+ 12  shot_type      313 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 34.2+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:14:07.200  2025-11-05  13:14:07.164  ...            4.0       lift
+2025-11-05 13:14:07.300  2025-11-05  13:14:07.265  ...          104.0       lift
+2025-11-05 13:14:07.400  2025-11-05  13:14:07.365  ...          204.0       lift
+2025-11-05 13:14:07.500  2025-11-05  13:14:07.465  ...          304.0       lift
+2025-11-05 13:14:07.600  2025-11-05  13:14:07.565  ...          404.0       lift
+
+[5 rows x 13 columns]
+0.05271791666666667
+0.12630481061460702
+0.21209999999999996
+5.56003258288733e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 312 entries, 2025-11-05 13:14:07.200000 to 2025-11-05 13:14:38.300000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           312 non-null    object
+ 1   Time           312 non-null    object
+ 2   Accel_X (g)    312 non-null    float64
+ 3   Accel_Y (g)    312 non-null    float64
+ 4   Accel_Z (g)    312 non-null    float64
+ 5   Gyro_X (°/s)   312 non-null    float64
+ 6   Gyro_Y (°/s)   312 non-null    float64
+ 7   Gyro_Z (°/s)   312 non-null    float64
+ 8   Mag_X (G)      312 non-null    float64
+ 9   Mag_Y (G)      312 non-null    float64
+ 10  Mag_Z (G)      312 non-null    float64
+ 11  Timestamp (s)  312 non-null    float64
+ 12  shot_type      312 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 34.1+ KB
+column: Accel_X (g) mean: 0.4516026602564102 subtracted
+column: Accel_Y (g) mean: 0.18523903846153847 subtracted
+column: Accel_Z (g) mean: -0.13264907051282052 subtracted
+column: Gyro_X (°/s) mean: 12.561055769230768 subtracted
+column: Gyro_Y (°/s) mean: 28.73210189102564 subtracted
+column: Gyro_Z (°/s) mean: -59.31369464743591 subtracted
+column: Mag_X (G) mean: 0.05271791666666667 subtracted
+column: Mag_Y (G) mean: -0.2464851923076923 subtracted
+column: Mag_Z (G) mean: 0.21209999999999996 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:14:07.200  2025-11-05  13:14:07.164  ...            4.0       lift
+2025-11-05 13:14:07.300  2025-11-05  13:14:07.265  ...          104.0       lift
+2025-11-05 13:14:07.400  2025-11-05  13:14:07.365  ...          204.0       lift
+2025-11-05 13:14:07.500  2025-11-05  13:14:07.465  ...          304.0       lift
+2025-11-05 13:14:07.600  2025-11-05  13:14:07.565  ...          404.0       lift
+
+[5 rows x 13 columns]
+-5.337610695313253e-18
+0.12630481061460702
+5.551115123125783e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 312 entries, 2025-11-05 13:14:07.200000 to 2025-11-05 13:14:38.300000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           312 non-null    object
+ 1   Time           312 non-null    object
+ 2   Accel_X (g)    312 non-null    float64
+ 3   Accel_Y (g)    312 non-null    float64
+ 4   Accel_Z (g)    312 non-null    float64
+ 5   Gyro_X (°/s)   312 non-null    float64
+ 6   Gyro_Y (°/s)   312 non-null    float64
+ 7   Gyro_Z (°/s)   312 non-null    float64
+ 8   Mag_X (G)      312 non-null    float64
+ 9   Mag_Y (G)      312 non-null    float64
+ 10  Mag_Z (G)      312 non-null    float64
+ 11  Timestamp (s)  312 non-null    float64
+ 12  shot_type      312 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 34.1+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:14:07.200  2025-11-05  13:14:07.164  ...            4.0       lift
+2025-11-05 13:14:07.300  2025-11-05  13:14:07.265  ...          104.0       lift
+2025-11-05 13:14:07.400  2025-11-05  13:14:07.365  ...          204.0       lift
+2025-11-05 13:14:07.500  2025-11-05  13:14:07.465  ...          304.0       lift
+2025-11-05 13:14:07.600  2025-11-05  13:14:07.565  ...          404.0       lift
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 312 entries, 2025-11-05 13:14:07.200000 to 2025-11-05 13:14:38.300000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           312 non-null    object
+ 1   Time           312 non-null    object
+ 2   Accel_X (g)    312 non-null    float64
+ 3   Accel_Y (g)    312 non-null    float64
+ 4   Accel_Z (g)    312 non-null    float64
+ 5   Gyro_X (°/s)   312 non-null    float64
+ 6   Gyro_Y (°/s)   312 non-null    float64
+ 7   Gyro_Z (°/s)   312 non-null    float64
+ 8   Mag_X (G)      312 non-null    float64
+ 9   Mag_Y (G)      312 non-null    float64
+ 10  Mag_Z (G)      312 non-null    float64
+ 11  Timestamp (s)  312 non-null    float64
+ 12  shot_type      312 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 34.1+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (249, 12)
+Shape of X_test: (63, 12)
+Shape of y_train: (249,)
+Shape of y_test: (63,)
+Creating windows for training set (Total Timesteps: 249).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 23 windows for the training set.
+Creating windows for validating set (Total Timesteps: 63).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 5 windows for the validating set.
+| Pipeline for lift finished. Data saved to Matrices'(23, 20, 9) (23,)' '(5, 20, 9) (5,)' . |
+=======================================================
+Processing: smash
+
+=======================================================
+| STARTING PIPELINE for Shot Type: smash |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: smash
+Loaded: ./new_10_kyle/smash_10_kyle.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-11-05  13:08:58.842      0.00031  ...   -0.48713     0.2121            4.0
+1  2025-11-05  13:08:58.943     -0.00344  ...   -0.48758     0.2121          104.0
+2  2025-11-05  13:08:59.042     -0.00556  ...   -0.48783     0.2121          204.0
+3  2025-11-05  13:08:59.142     -0.00399  ...   -0.48733     0.2121          304.0
+4  2025-11-05  13:08:59.242     -0.00079  ...   -0.48783     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 251 entries, 2025-11-05 13:08:58.842000 to 2025-11-05 13:09:23.842000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           251 non-null    object
+ 1   Time           251 non-null    object
+ 2   Accel_X (g)    251 non-null    float64
+ 3   Accel_Y (g)    251 non-null    float64
+ 4   Accel_Z (g)    251 non-null    float64
+ 5   Gyro_X (°/s)   251 non-null    float64
+ 6   Gyro_Y (°/s)   251 non-null    float64
+ 7   Gyro_Z (°/s)   251 non-null    float64
+ 8   Mag_X (G)      251 non-null    float64
+ 9   Mag_Y (G)      251 non-null    float64
+ 10  Mag_Z (G)      251 non-null    float64
+ 11  Timestamp (s)  251 non-null    float64
+ 12  shot_type      251 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 27.5+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:08:58.900  2025-11-05  13:08:58.842  ...            4.0      smash
+2025-11-05 13:08:59.000  2025-11-05  13:08:58.943  ...          104.0      smash
+2025-11-05 13:08:59.100  2025-11-05  13:08:59.042  ...          204.0      smash
+2025-11-05 13:08:59.200  2025-11-05  13:08:59.142  ...          304.0      smash
+2025-11-05 13:08:59.300  2025-11-05  13:08:59.242  ...          404.0      smash
+
+[5 rows x 13 columns]
+-0.016392719999999996
+0.07278413126263324
+0.21209999999999996
+5.562250771475058e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 250 entries, 2025-11-05 13:08:58.900000 to 2025-11-05 13:09:23.800000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           250 non-null    object
+ 1   Time           250 non-null    object
+ 2   Accel_X (g)    250 non-null    float64
+ 3   Accel_Y (g)    250 non-null    float64
+ 4   Accel_Z (g)    250 non-null    float64
+ 5   Gyro_X (°/s)   250 non-null    float64
+ 6   Gyro_Y (°/s)   250 non-null    float64
+ 7   Gyro_Z (°/s)   250 non-null    float64
+ 8   Mag_X (G)      250 non-null    float64
+ 9   Mag_Y (G)      250 non-null    float64
+ 10  Mag_Z (G)      250 non-null    float64
+ 11  Timestamp (s)  250 non-null    float64
+ 12  shot_type      250 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 27.3+ KB
+column: Accel_X (g) mean: 0.24157807999999997 subtracted
+column: Accel_Y (g) mean: -0.18068628 subtracted
+column: Accel_Z (g) mean: -0.23528124 subtracted
+column: Gyro_X (°/s) mean: 21.813966120000003 subtracted
+column: Gyro_Y (°/s) mean: -25.3459898 subtracted
+column: Gyro_Z (°/s) mean: -33.386935359999995 subtracted
+column: Mag_X (G) mean: -0.016392719999999996 subtracted
+column: Mag_Y (G) mean: -0.41856504 subtracted
+column: Mag_Z (G) mean: 0.21209999999999996 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:08:58.900  2025-11-05  13:08:58.842  ...            4.0      smash
+2025-11-05 13:08:59.000  2025-11-05  13:08:58.943  ...          104.0      smash
+2025-11-05 13:08:59.100  2025-11-05  13:08:59.042  ...          204.0      smash
+2025-11-05 13:08:59.200  2025-11-05  13:08:59.142  ...          304.0      smash
+2025-11-05 13:08:59.300  2025-11-05  13:08:59.242  ...          404.0      smash
+
+[5 rows x 13 columns]
+-2.6645352591003758e-18
+0.07278413126263324
+5.551115123125783e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 250 entries, 2025-11-05 13:08:58.900000 to 2025-11-05 13:09:23.800000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           250 non-null    object
+ 1   Time           250 non-null    object
+ 2   Accel_X (g)    250 non-null    float64
+ 3   Accel_Y (g)    250 non-null    float64
+ 4   Accel_Z (g)    250 non-null    float64
+ 5   Gyro_X (°/s)   250 non-null    float64
+ 6   Gyro_Y (°/s)   250 non-null    float64
+ 7   Gyro_Z (°/s)   250 non-null    float64
+ 8   Mag_X (G)      250 non-null    float64
+ 9   Mag_Y (G)      250 non-null    float64
+ 10  Mag_Z (G)      250 non-null    float64
+ 11  Timestamp (s)  250 non-null    float64
+ 12  shot_type      250 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 27.3+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-11-05 13:08:58.900  2025-11-05  13:08:58.842  ...            4.0      smash
+2025-11-05 13:08:59.000  2025-11-05  13:08:58.943  ...          104.0      smash
+2025-11-05 13:08:59.100  2025-11-05  13:08:59.042  ...          204.0      smash
+2025-11-05 13:08:59.200  2025-11-05  13:08:59.142  ...          304.0      smash
+2025-11-05 13:08:59.300  2025-11-05  13:08:59.242  ...          404.0      smash
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 250 entries, 2025-11-05 13:08:58.900000 to 2025-11-05 13:09:23.800000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           250 non-null    object
+ 1   Time           250 non-null    object
+ 2   Accel_X (g)    250 non-null    float64
+ 3   Accel_Y (g)    250 non-null    float64
+ 4   Accel_Z (g)    250 non-null    float64
+ 5   Gyro_X (°/s)   250 non-null    float64
+ 6   Gyro_Y (°/s)   250 non-null    float64
+ 7   Gyro_Z (°/s)   250 non-null    float64
+ 8   Mag_X (G)      250 non-null    float64
+ 9   Mag_Y (G)      250 non-null    float64
+ 10  Mag_Z (G)      250 non-null    float64
+ 11  Timestamp (s)  250 non-null    float64
+ 12  shot_type      250 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 27.3+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (200, 12)
+Shape of X_test: (50, 12)
+Shape of y_train: (200,)
+Shape of y_test: (50,)
+Creating windows for training set (Total Timesteps: 200).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 19 windows for the training set.
+Creating windows for validating set (Total Timesteps: 50).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 4 windows for the validating set.
+| Pipeline for smash finished. Data saved to Matrices'(19, 20, 9) (19,)' '(4, 20, 9) (4,)' . |
+=======================================================
+Processing: clear
+
+=======================================================
+| STARTING PIPELINE for Shot Type: clear |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: clear
+Loaded: ./badminton_shots/clear_x30.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-10-20  13:09:12.597      0.07543  ...   -0.36313     0.2121            4.0
+1  2025-10-20  13:09:12.698      0.14208  ...   -0.37900     0.2121          104.0
+2  2025-10-20  13:09:12.795      0.17734  ...   -0.38178     0.2121          204.0
+3  2025-10-20  13:09:12.898      0.37348  ...   -0.38128     0.2121          304.0
+4  2025-10-20  13:09:12.998      0.97901  ...   -0.40476     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 618 entries, 2025-10-20 13:09:12.597000 to 2025-10-20 13:10:14.302000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           618 non-null    object
+ 1   Time           618 non-null    object
+ 2   Accel_X (g)    618 non-null    float64
+ 3   Accel_Y (g)    618 non-null    float64
+ 4   Accel_Z (g)    618 non-null    float64
+ 5   Gyro_X (°/s)   618 non-null    float64
+ 6   Gyro_Y (°/s)   618 non-null    float64
+ 7   Gyro_Z (°/s)   618 non-null    float64
+ 8   Mag_X (G)      618 non-null    float64
+ 9   Mag_Y (G)      618 non-null    float64
+ 10  Mag_Z (G)      618 non-null    float64
+ 11  Timestamp (s)  618 non-null    float64
+ 12  shot_type      618 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 67.6+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 13:09:12.600  2025-10-20  13:09:12.597  ...            4.0      clear
+2025-10-20 13:09:12.700  2025-10-20  13:09:12.698  ...          104.0      clear
+2025-10-20 13:09:12.800  2025-10-20  13:09:12.795  ...          204.0      clear
+2025-10-20 13:09:12.900  2025-10-20  13:09:12.898  ...          304.0      clear
+2025-10-20 13:09:13.000  2025-10-20  13:09:12.998  ...          404.0      clear
+
+[5 rows x 13 columns]
+0.01163776699029126
+0.24804473727923795
+0.21209999999999998
+2.777805887214321e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 618 entries, 2025-10-20 13:09:12.600000 to 2025-10-20 13:10:14.300000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           618 non-null    object
+ 1   Time           618 non-null    object
+ 2   Accel_X (g)    618 non-null    float64
+ 3   Accel_Y (g)    618 non-null    float64
+ 4   Accel_Z (g)    618 non-null    float64
+ 5   Gyro_X (°/s)   618 non-null    float64
+ 6   Gyro_Y (°/s)   618 non-null    float64
+ 7   Gyro_Z (°/s)   618 non-null    float64
+ 8   Mag_X (G)      618 non-null    float64
+ 9   Mag_Y (G)      618 non-null    float64
+ 10  Mag_Z (G)      618 non-null    float64
+ 11  Timestamp (s)  618 non-null    float64
+ 12  shot_type      618 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 67.6+ KB
+column: Accel_X (g) mean: 0.4654561326860842 subtracted
+column: Accel_Y (g) mean: 0.9765875728155338 subtracted
+column: Accel_Z (g) mean: -0.73141428802589 subtracted
+column: Gyro_X (°/s) mean: 26.723956148867316 subtracted
+column: Gyro_Y (°/s) mean: -96.71416169902913 subtracted
+column: Gyro_Z (°/s) mean: 39.692073058252426 subtracted
+column: Mag_X (G) mean: 0.01163776699029126 subtracted
+column: Mag_Y (G) mean: -0.18386537216828477 subtracted
+column: Mag_Z (G) mean: 0.21209999999999998 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 13:09:12.600  2025-10-20  13:09:12.597  ...            4.0      clear
+2025-10-20 13:09:12.700  2025-10-20  13:09:12.698  ...          104.0      clear
+2025-10-20 13:09:12.800  2025-10-20  13:09:12.795  ...          204.0      clear
+2025-10-20 13:09:12.900  2025-10-20  13:09:12.898  ...          304.0      clear
+2025-10-20 13:09:13.000  2025-10-20  13:09:12.998  ...          404.0      clear
+
+[5 rows x 13 columns]
+-3.5929547722496977e-19
+0.24804473727923795
+2.7755575615628914e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 618 entries, 2025-10-20 13:09:12.600000 to 2025-10-20 13:10:14.300000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           618 non-null    object
+ 1   Time           618 non-null    object
+ 2   Accel_X (g)    618 non-null    float64
+ 3   Accel_Y (g)    618 non-null    float64
+ 4   Accel_Z (g)    618 non-null    float64
+ 5   Gyro_X (°/s)   618 non-null    float64
+ 6   Gyro_Y (°/s)   618 non-null    float64
+ 7   Gyro_Z (°/s)   618 non-null    float64
+ 8   Mag_X (G)      618 non-null    float64
+ 9   Mag_Y (G)      618 non-null    float64
+ 10  Mag_Z (G)      618 non-null    float64
+ 11  Timestamp (s)  618 non-null    float64
+ 12  shot_type      618 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 67.6+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 13:09:12.600  2025-10-20  13:09:12.597  ...            4.0      clear
+2025-10-20 13:09:12.700  2025-10-20  13:09:12.698  ...          104.0      clear
+2025-10-20 13:09:12.800  2025-10-20  13:09:12.795  ...          204.0      clear
+2025-10-20 13:09:12.900  2025-10-20  13:09:12.898  ...          304.0      clear
+2025-10-20 13:09:13.000  2025-10-20  13:09:12.998  ...          404.0      clear
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 618 entries, 2025-10-20 13:09:12.600000 to 2025-10-20 13:10:14.300000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           618 non-null    object
+ 1   Time           618 non-null    object
+ 2   Accel_X (g)    618 non-null    float64
+ 3   Accel_Y (g)    618 non-null    float64
+ 4   Accel_Z (g)    618 non-null    float64
+ 5   Gyro_X (°/s)   618 non-null    float64
+ 6   Gyro_Y (°/s)   618 non-null    float64
+ 7   Gyro_Z (°/s)   618 non-null    float64
+ 8   Mag_X (G)      618 non-null    float64
+ 9   Mag_Y (G)      618 non-null    float64
+ 10  Mag_Z (G)      618 non-null    float64
+ 11  Timestamp (s)  618 non-null    float64
+ 12  shot_type      618 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 67.6+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (494, 12)
+Shape of X_test: (124, 12)
+Shape of y_train: (494,)
+Shape of y_test: (124,)
+Creating windows for training set (Total Timesteps: 494).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 48 windows for the training set.
+Creating windows for validating set (Total Timesteps: 124).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 11 windows for the validating set.
+| Pipeline for clear finished. Data saved to Matrices'(48, 20, 9) (48,)' '(11, 20, 9) (11,)' . |
+=======================================================
+Processing: drive
+
+=======================================================
+| STARTING PIPELINE for Shot Type: drive |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: drive
+Loaded: ./badminton_shots/drive_x30.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-10-20  12:52:43.082      0.42255  ...   -0.21536     0.2121            4.0
+1  2025-10-20  12:52:43.183      0.35928  ...   -0.20478     0.2121          104.0
+2  2025-10-20  12:52:43.282      0.21738  ...   -0.20045     0.2121          204.0
+3  2025-10-20  12:52:43.382      0.07804  ...   -0.18736     0.2121          304.0
+4  2025-10-20  12:52:43.479      0.12556  ...   -0.19367     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 613 entries, 2025-10-20 12:52:43.082000 to 2025-10-20 12:53:44.286000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           613 non-null    object
+ 1   Time           613 non-null    object
+ 2   Accel_X (g)    613 non-null    float64
+ 3   Accel_Y (g)    613 non-null    float64
+ 4   Accel_Z (g)    613 non-null    float64
+ 5   Gyro_X (°/s)   613 non-null    float64
+ 6   Gyro_Y (°/s)   613 non-null    float64
+ 7   Gyro_Z (°/s)   613 non-null    float64
+ 8   Mag_X (G)      613 non-null    float64
+ 9   Mag_Y (G)      613 non-null    float64
+ 10  Mag_Z (G)      613 non-null    float64
+ 11  Timestamp (s)  613 non-null    float64
+ 12  shot_type      613 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 67.0+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 12:52:43.100  2025-10-20  12:52:43.082  ...            4.0      drive
+2025-10-20 12:52:43.200  2025-10-20  12:52:43.183  ...          104.0      drive
+2025-10-20 12:52:43.300  2025-10-20  12:52:43.282  ...          204.0      drive
+2025-10-20 12:52:43.400  2025-10-20  12:52:43.382  ...          304.0      drive
+2025-10-20 12:52:43.500  2025-10-20  12:52:43.479  ...          404.0      drive
+
+[5 rows x 13 columns]
+0.077034477124183
+0.17992469226948682
+0.21209999999999998
+2.7778279566759113e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 612 entries, 2025-10-20 12:52:43.100000 to 2025-10-20 12:53:44.200000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           612 non-null    object
+ 1   Time           612 non-null    object
+ 2   Accel_X (g)    612 non-null    float64
+ 3   Accel_Y (g)    612 non-null    float64
+ 4   Accel_Z (g)    612 non-null    float64
+ 5   Gyro_X (°/s)   612 non-null    float64
+ 6   Gyro_Y (°/s)   612 non-null    float64
+ 7   Gyro_Z (°/s)   612 non-null    float64
+ 8   Mag_X (G)      612 non-null    float64
+ 9   Mag_Y (G)      612 non-null    float64
+ 10  Mag_Z (G)      612 non-null    float64
+ 11  Timestamp (s)  612 non-null    float64
+ 12  shot_type      612 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 66.9+ KB
+column: Accel_X (g) mean: 0.2257943464052288 subtracted
+column: Accel_Y (g) mean: -0.4739877124183006 subtracted
+column: Accel_Z (g) mean: -0.6252923529411765 subtracted
+column: Gyro_X (°/s) mean: 12.367112908496733 subtracted
+column: Gyro_Y (°/s) mean: 2.423126552287581 subtracted
+column: Gyro_Z (°/s) mean: 0.15461686274509812 subtracted
+column: Mag_X (G) mean: 0.077034477124183 subtracted
+column: Mag_Y (G) mean: -0.3170302777777778 subtracted
+column: Mag_Z (G) mean: 0.21209999999999998 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 12:52:43.100  2025-10-20  12:52:43.082  ...            4.0      drive
+2025-10-20 12:52:43.200  2025-10-20  12:52:43.183  ...          104.0      drive
+2025-10-20 12:52:43.300  2025-10-20  12:52:43.282  ...          204.0      drive
+2025-10-20 12:52:43.400  2025-10-20  12:52:43.382  ...          304.0      drive
+2025-10-20 12:52:43.500  2025-10-20  12:52:43.479  ...          404.0      drive
+
+[5 rows x 13 columns]
+7.256359638072919e-18
+0.17992469226948682
+2.7755575615628914e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 612 entries, 2025-10-20 12:52:43.100000 to 2025-10-20 12:53:44.200000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           612 non-null    object
+ 1   Time           612 non-null    object
+ 2   Accel_X (g)    612 non-null    float64
+ 3   Accel_Y (g)    612 non-null    float64
+ 4   Accel_Z (g)    612 non-null    float64
+ 5   Gyro_X (°/s)   612 non-null    float64
+ 6   Gyro_Y (°/s)   612 non-null    float64
+ 7   Gyro_Z (°/s)   612 non-null    float64
+ 8   Mag_X (G)      612 non-null    float64
+ 9   Mag_Y (G)      612 non-null    float64
+ 10  Mag_Z (G)      612 non-null    float64
+ 11  Timestamp (s)  612 non-null    float64
+ 12  shot_type      612 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 66.9+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 12:52:43.100  2025-10-20  12:52:43.082  ...            4.0      drive
+2025-10-20 12:52:43.200  2025-10-20  12:52:43.183  ...          104.0      drive
+2025-10-20 12:52:43.300  2025-10-20  12:52:43.282  ...          204.0      drive
+2025-10-20 12:52:43.400  2025-10-20  12:52:43.382  ...          304.0      drive
+2025-10-20 12:52:43.500  2025-10-20  12:52:43.479  ...          404.0      drive
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 612 entries, 2025-10-20 12:52:43.100000 to 2025-10-20 12:53:44.200000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           612 non-null    object
+ 1   Time           612 non-null    object
+ 2   Accel_X (g)    612 non-null    float64
+ 3   Accel_Y (g)    612 non-null    float64
+ 4   Accel_Z (g)    612 non-null    float64
+ 5   Gyro_X (°/s)   612 non-null    float64
+ 6   Gyro_Y (°/s)   612 non-null    float64
+ 7   Gyro_Z (°/s)   612 non-null    float64
+ 8   Mag_X (G)      612 non-null    float64
+ 9   Mag_Y (G)      612 non-null    float64
+ 10  Mag_Z (G)      612 non-null    float64
+ 11  Timestamp (s)  612 non-null    float64
+ 12  shot_type      612 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 66.9+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (489, 12)
+Shape of X_test: (123, 12)
+Shape of y_train: (489,)
+Shape of y_test: (123,)
+Creating windows for training set (Total Timesteps: 489).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 47 windows for the training set.
+Creating windows for validating set (Total Timesteps: 123).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 11 windows for the validating set.
+| Pipeline for drive finished. Data saved to Matrices'(47, 20, 9) (47,)' '(11, 20, 9) (11,)' . |
+=======================================================
+Processing: lift
+
+=======================================================
+| STARTING PIPELINE for Shot Type: lift |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: lift
+Loaded: ./badminton_shots/lift_x30.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-10-20  12:57:49.357     -0.87836  ...   -0.21979     0.2121            4.0
+1  2025-10-20  12:57:49.457     -0.92269  ...   -0.21981     0.2121          104.0
+2  2025-10-20  12:57:49.557     -0.88339  ...   -0.22772     0.2121          204.0
+3  2025-10-20  12:57:49.657     -0.94872  ...   -0.23836     0.2121          304.0
+4  2025-10-20  12:57:49.757     -0.95963  ...   -0.23541     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 547 entries, 2025-10-20 12:57:49.357000 to 2025-10-20 12:58:43.965000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           547 non-null    object
+ 1   Time           547 non-null    object
+ 2   Accel_X (g)    547 non-null    float64
+ 3   Accel_Y (g)    547 non-null    float64
+ 4   Accel_Z (g)    547 non-null    float64
+ 5   Gyro_X (°/s)   547 non-null    float64
+ 6   Gyro_Y (°/s)   547 non-null    float64
+ 7   Gyro_Z (°/s)   547 non-null    float64
+ 8   Mag_X (G)      547 non-null    float64
+ 9   Mag_Y (G)      547 non-null    float64
+ 10  Mag_Z (G)      547 non-null    float64
+ 11  Timestamp (s)  547 non-null    float64
+ 12  shot_type      547 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 59.8+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 12:57:49.400  2025-10-20  12:57:49.357  ...            4.0       lift
+2025-10-20 12:57:49.500  2025-10-20  12:57:49.457  ...          104.0       lift
+2025-10-20 12:57:49.600  2025-10-20  12:57:49.557  ...          204.0       lift
+2025-10-20 12:57:49.700  2025-10-20  12:57:49.657  ...          304.0       lift
+2025-10-20 12:57:49.800  2025-10-20  12:57:49.757  ...          404.0       lift
+
+[5 rows x 13 columns]
+-0.44065518315018315
+0.11537951210998007
+0.21209999999999998
+2.7781027776516515e-17
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 546 entries, 2025-10-20 12:57:49.400000 to 2025-10-20 12:58:43.900000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           546 non-null    object
+ 1   Time           546 non-null    object
+ 2   Accel_X (g)    546 non-null    float64
+ 3   Accel_Y (g)    546 non-null    float64
+ 4   Accel_Z (g)    546 non-null    float64
+ 5   Gyro_X (°/s)   546 non-null    float64
+ 6   Gyro_Y (°/s)   546 non-null    float64
+ 7   Gyro_Z (°/s)   546 non-null    float64
+ 8   Mag_X (G)      546 non-null    float64
+ 9   Mag_Y (G)      546 non-null    float64
+ 10  Mag_Z (G)      546 non-null    float64
+ 11  Timestamp (s)  546 non-null    float64
+ 12  shot_type      546 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 59.7+ KB
+column: Accel_X (g) mean: -0.7076814102564103 subtracted
+column: Accel_Y (g) mean: 0.34445155677655676 subtracted
+column: Accel_Z (g) mean: 0.12902166666666665 subtracted
+column: Gyro_X (°/s) mean: 8.972662271062271 subtracted
+column: Gyro_Y (°/s) mean: 67.79213514652014 subtracted
+column: Gyro_Z (°/s) mean: 56.79257641025641 subtracted
+column: Mag_X (G) mean: -0.44065518315018315 subtracted
+column: Mag_Y (G) mean: -0.1959046703296703 subtracted
+column: Mag_Z (G) mean: 0.21209999999999998 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 12:57:49.400  2025-10-20  12:57:49.357  ...            4.0       lift
+2025-10-20 12:57:49.500  2025-10-20  12:57:49.457  ...          104.0       lift
+2025-10-20 12:57:49.600  2025-10-20  12:57:49.557  ...          204.0       lift
+2025-10-20 12:57:49.700  2025-10-20  12:57:49.657  ...          304.0       lift
+2025-10-20 12:57:49.800  2025-10-20  12:57:49.757  ...          404.0       lift
+
+[5 rows x 13 columns]
+-8.133502011905909e-19
+0.11537951210998007
+2.7755575615628914e-17
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 546 entries, 2025-10-20 12:57:49.400000 to 2025-10-20 12:58:43.900000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           546 non-null    object
+ 1   Time           546 non-null    object
+ 2   Accel_X (g)    546 non-null    float64
+ 3   Accel_Y (g)    546 non-null    float64
+ 4   Accel_Z (g)    546 non-null    float64
+ 5   Gyro_X (°/s)   546 non-null    float64
+ 6   Gyro_Y (°/s)   546 non-null    float64
+ 7   Gyro_Z (°/s)   546 non-null    float64
+ 8   Mag_X (G)      546 non-null    float64
+ 9   Mag_Y (G)      546 non-null    float64
+ 10  Mag_Z (G)      546 non-null    float64
+ 11  Timestamp (s)  546 non-null    float64
+ 12  shot_type      546 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 59.7+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 12:57:49.400  2025-10-20  12:57:49.357  ...            4.0       lift
+2025-10-20 12:57:49.500  2025-10-20  12:57:49.457  ...          104.0       lift
+2025-10-20 12:57:49.600  2025-10-20  12:57:49.557  ...          204.0       lift
+2025-10-20 12:57:49.700  2025-10-20  12:57:49.657  ...          304.0       lift
+2025-10-20 12:57:49.800  2025-10-20  12:57:49.757  ...          404.0       lift
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 546 entries, 2025-10-20 12:57:49.400000 to 2025-10-20 12:58:43.900000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           546 non-null    object
+ 1   Time           546 non-null    object
+ 2   Accel_X (g)    546 non-null    float64
+ 3   Accel_Y (g)    546 non-null    float64
+ 4   Accel_Z (g)    546 non-null    float64
+ 5   Gyro_X (°/s)   546 non-null    float64
+ 6   Gyro_Y (°/s)   546 non-null    float64
+ 7   Gyro_Z (°/s)   546 non-null    float64
+ 8   Mag_X (G)      546 non-null    float64
+ 9   Mag_Y (G)      546 non-null    float64
+ 10  Mag_Z (G)      546 non-null    float64
+ 11  Timestamp (s)  546 non-null    float64
+ 12  shot_type      546 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 59.7+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (436, 12)
+Shape of X_test: (110, 12)
+Shape of y_train: (436,)
+Shape of y_test: (110,)
+Creating windows for training set (Total Timesteps: 436).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 42 windows for the training set.
+Creating windows for validating set (Total Timesteps: 110).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 10 windows for the validating set.
+| Pipeline for lift finished. Data saved to Matrices'(42, 20, 9) (42,)' '(10, 20, 9) (10,)' . |
+=======================================================
+Processing: smash
+
+=======================================================
+| STARTING PIPELINE for Shot Type: smash |
+=======================================================
+--- 1. Data Initialization & Setup ---
+Loading 1 raw files for shot type: smash
+Loaded: ./badminton_shots/smash_x30.csv
+Combined Data head:
+         Date          Time  Accel_X (g)  ...  Mag_Y (G)  Mag_Z (G)  Timestamp (s)
+0  2025-10-20  13:12:44.825      0.27791  ...   -0.29341     0.2121            4.0
+1  2025-10-20  13:12:44.925      0.30776  ...   -0.29041     0.2121          104.0
+2  2025-10-20  13:12:45.024      0.32272  ...   -0.28482     0.2121          204.0
+3  2025-10-20  13:12:45.125      0.39379  ...   -0.27526     0.2121          304.0
+4  2025-10-20  13:12:45.225      0.38390  ...   -0.26513     0.2121          404.0
+
+[5 rows x 12 columns]
+accel_cols: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)']
+gyro_cols: ['Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)']
+mag_cols: ['Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+
+--- 2. Preprocessing ---
+No duplicated or overlapping time entries found.
+set_index_sort DataFrame head:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 670 entries, 2025-10-20 13:12:44.825000 to 2025-10-20 13:13:51.729000
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           670 non-null    object
+ 1   Time           670 non-null    object
+ 2   Accel_X (g)    670 non-null    float64
+ 3   Accel_Y (g)    670 non-null    float64
+ 4   Accel_Z (g)    670 non-null    float64
+ 5   Gyro_X (°/s)   670 non-null    float64
+ 6   Gyro_Y (°/s)   670 non-null    float64
+ 7   Gyro_Z (°/s)   670 non-null    float64
+ 8   Mag_X (G)      670 non-null    float64
+ 9   Mag_Y (G)      670 non-null    float64
+ 10  Mag_Z (G)      670 non-null    float64
+ 11  Timestamp (s)  670 non-null    float64
+ 12  shot_type      670 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 73.3+ KB
+Resampled DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 13:12:44.900  2025-10-20  13:12:44.825  ...            4.0      smash
+2025-10-20 13:12:45.000  2025-10-20  13:12:44.925  ...          104.0      smash
+2025-10-20 13:12:45.100  2025-10-20  13:12:45.024  ...          204.0      smash
+2025-10-20 13:12:45.200  2025-10-20  13:12:45.125  ...          304.0      smash
+2025-10-20 13:12:45.300  2025-10-20  13:12:45.225  ...          404.0      smash
+
+[5 rows x 13 columns]
+0.09612582959641254
+0.2532838485730996
+0.2121
+0.0
+
+Resampled DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 669 entries, 2025-10-20 13:12:44.900000 to 2025-10-20 13:13:51.700000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           669 non-null    object
+ 1   Time           669 non-null    object
+ 2   Accel_X (g)    669 non-null    float64
+ 3   Accel_Y (g)    669 non-null    float64
+ 4   Accel_Z (g)    669 non-null    float64
+ 5   Gyro_X (°/s)   669 non-null    float64
+ 6   Gyro_Y (°/s)   669 non-null    float64
+ 7   Gyro_Z (°/s)   669 non-null    float64
+ 8   Mag_X (G)      669 non-null    float64
+ 9   Mag_Y (G)      669 non-null    float64
+ 10  Mag_Z (G)      669 non-null    float64
+ 11  Timestamp (s)  669 non-null    float64
+ 12  shot_type      669 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 73.2+ KB
+column: Accel_X (g) mean: 0.6013407174887893 subtracted
+column: Accel_Y (g) mean: 0.9312607174887892 subtracted
+column: Accel_Z (g) mean: -0.6190353662182361 subtracted
+column: Gyro_X (°/s) mean: 83.58209605381167 subtracted
+column: Gyro_Y (°/s) mean: -94.2219193721973 subtracted
+column: Gyro_Z (°/s) mean: 64.9043500896861 subtracted
+column: Mag_X (G) mean: 0.09612582959641254 subtracted
+column: Mag_Y (G) mean: -0.1395578624813154 subtracted
+column: Mag_Z (G) mean: 0.2121 subtracted
+Calibrated DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 13:12:44.900  2025-10-20  13:12:44.825  ...            4.0      smash
+2025-10-20 13:12:45.000  2025-10-20  13:12:44.925  ...          104.0      smash
+2025-10-20 13:12:45.100  2025-10-20  13:12:45.024  ...          204.0      smash
+2025-10-20 13:12:45.200  2025-10-20  13:12:45.125  ...          304.0      smash
+2025-10-20 13:12:45.300  2025-10-20  13:12:45.225  ...          404.0      smash
+
+[5 rows x 13 columns]
+1.92505038649504e-17
+0.2532838485730996
+0.0
+0.0
+
+Calibrated DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 669 entries, 2025-10-20 13:12:44.900000 to 2025-10-20 13:13:51.700000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           669 non-null    object
+ 1   Time           669 non-null    object
+ 2   Accel_X (g)    669 non-null    float64
+ 3   Accel_Y (g)    669 non-null    float64
+ 4   Accel_Z (g)    669 non-null    float64
+ 5   Gyro_X (°/s)   669 non-null    float64
+ 6   Gyro_Y (°/s)   669 non-null    float64
+ 7   Gyro_Z (°/s)   669 non-null    float64
+ 8   Mag_X (G)      669 non-null    float64
+ 9   Mag_Y (G)      669 non-null    float64
+ 10  Mag_Z (G)      669 non-null    float64
+ 11  Timestamp (s)  669 non-null    float64
+ 12  shot_type      669 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 73.2+ KB
+Applying Savitzky-Golay Filter (Window: 5, PolyOrder: 2) to columns: ['Accel_X (g)', 'Accel_Y (g)', 'Accel_Z (g)', 'Gyro_X (°/s)', 'Gyro_Y (°/s)', 'Gyro_Z (°/s)', 'Mag_X (G)', 'Mag_Y (G)', 'Mag_Z (G)']
+Column: Accel_X (g) smoothed.
+Column: Accel_Y (g) smoothed.
+Column: Accel_Z (g) smoothed.
+Column: Gyro_X (°/s) smoothed.
+Column: Gyro_Y (°/s) smoothed.
+Column: Gyro_Z (°/s) smoothed.
+Column: Mag_X (G) smoothed.
+Column: Mag_Y (G) smoothed.
+Column: Mag_Z (G) smoothed.
+
+Noise Reduced DataFrame head:
+                               Date          Time  ...  Timestamp (s)  shot_type
+datetime                                           ...
+2025-10-20 13:12:44.900  2025-10-20  13:12:44.825  ...            4.0      smash
+2025-10-20 13:12:45.000  2025-10-20  13:12:44.925  ...          104.0      smash
+2025-10-20 13:12:45.100  2025-10-20  13:12:45.024  ...          204.0      smash
+2025-10-20 13:12:45.200  2025-10-20  13:12:45.125  ...          304.0      smash
+2025-10-20 13:12:45.300  2025-10-20  13:12:45.225  ...          404.0      smash
+
+[5 rows x 13 columns]
+
+Noise Reduced DataFrame info:
+<class 'pandas.core.frame.DataFrame'>
+DatetimeIndex: 669 entries, 2025-10-20 13:12:44.900000 to 2025-10-20 13:13:51.700000
+Freq: 100ms
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Date           669 non-null    object
+ 1   Time           669 non-null    object
+ 2   Accel_X (g)    669 non-null    float64
+ 3   Accel_Y (g)    669 non-null    float64
+ 4   Accel_Z (g)    669 non-null    float64
+ 5   Gyro_X (°/s)   669 non-null    float64
+ 6   Gyro_Y (°/s)   669 non-null    float64
+ 7   Gyro_Z (°/s)   669 non-null    float64
+ 8   Mag_X (G)      669 non-null    float64
+ 9   Mag_Y (G)      669 non-null    float64
+ 10  Mag_Z (G)      669 non-null    float64
+ 11  Timestamp (s)  669 non-null    float64
+ 12  shot_type      669 non-null    object
+dtypes: float64(10), object(3)
+memory usage: 73.2+ KB
+
+--- 3. Splitting & Windowing ---
+Shape of X_train: (535, 12)
+Shape of X_test: (134, 12)
+Shape of y_train: (535,)
+Shape of y_test: (134,)
+Creating windows for training set (Total Timesteps: 535).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 52 windows for the training set.
+Creating windows for validating set (Total Timesteps: 134).
+Window Size: 20, Overlap: 10, Step Size: 10
+Successfully created 12 windows for the validating set.
+| Pipeline for smash finished. Data saved to Matrices'(52, 20, 9) (52,)' '(12, 20, 9) (12,)' . |
+=======================================================
+Final train windows shape: (265, 20, 9)
+Final test windows shape: (59, 20, 9)
+Epoch 1/40 | Train Loss=1.2670, Val Loss=1.0690 | Train Acc=0.4981, Val Acc=0.7627
+Epoch 2/40 | Train Loss=1.0019, Val Loss=0.7448 | Train Acc=0.7396, Val Acc=0.8814
+Epoch 3/40 | Train Loss=0.7367, Val Loss=0.4885 | Train Acc=0.8038, Val Acc=0.9831
+Epoch 4/40 | Train Loss=0.4918, Val Loss=0.2970 | Train Acc=0.8792, Val Acc=1.0000
+Epoch 5/40 | Train Loss=0.3451, Val Loss=0.1758 | Train Acc=0.9321, Val Acc=1.0000
+Epoch 6/40 | Train Loss=0.2305, Val Loss=0.1750 | Train Acc=0.9321, Val Acc=0.9492
+Epoch 7/40 | Train Loss=0.1650, Val Loss=0.1819 | Train Acc=0.9509, Val Acc=0.9153
+Epoch 8/40 | Train Loss=0.1350, Val Loss=0.0792 | Train Acc=0.9623, Val Acc=0.9661
+Epoch 9/40 | Train Loss=0.1104, Val Loss=0.1069 | Train Acc=0.9660, Val Acc=0.9661
+Epoch 10/40 | Train Loss=0.1462, Val Loss=0.1261 | Train Acc=0.9698, Val Acc=0.9492
+Epoch 11/40 | Train Loss=0.1294, Val Loss=0.0832 | Train Acc=0.9623, Val Acc=1.0000
+Epoch 12/40 | Train Loss=0.0875, Val Loss=0.0533 | Train Acc=0.9698, Val Acc=0.9661
+Epoch 13/40 | Train Loss=0.1062, Val Loss=0.0205 | Train Acc=0.9698, Val Acc=1.0000
+Epoch 14/40 | Train Loss=0.0654, Val Loss=0.0233 | Train Acc=0.9774, Val Acc=1.0000
+Epoch 15/40 | Train Loss=0.0887, Val Loss=0.0575 | Train Acc=0.9736, Val Acc=0.9831
+Epoch 16/40 | Train Loss=0.0960, Val Loss=0.0156 | Train Acc=0.9736, Val Acc=1.0000
+Epoch 17/40 | Train Loss=0.0672, Val Loss=0.0732 | Train Acc=0.9887, Val Acc=0.9661
+Epoch 18/40 | Train Loss=0.0520, Val Loss=0.0976 | Train Acc=0.9774, Val Acc=0.9492
+Epoch 19/40 | Train Loss=0.0407, Val Loss=0.1715 | Train Acc=0.9887, Val Acc=0.9661
+Epoch 20/40 | Train Loss=0.0514, Val Loss=0.2866 | Train Acc=0.9849, Val Acc=0.8814
+Epoch 21/40 | Train Loss=0.0485, Val Loss=0.1134 | Train Acc=0.9811, Val Acc=0.9661
+Epoch 22/40 | Train Loss=0.0237, Val Loss=0.0076 | Train Acc=0.9925, Val Acc=1.0000
+Epoch 23/40 | Train Loss=0.0336, Val Loss=0.0057 | Train Acc=0.9962, Val Acc=1.0000
+Epoch 24/40 | Train Loss=0.0086, Val Loss=0.0056 | Train Acc=1.0000, Val Acc=1.0000
+Epoch 25/40 | Train Loss=0.0126, Val Loss=0.0154 | Train Acc=0.9962, Val Acc=1.0000
+Epoch 26/40 | Train Loss=0.0142, Val Loss=0.0210 | Train Acc=1.0000, Val Acc=1.0000
+Epoch 27/40 | Train Loss=0.0114, Val Loss=0.0172 | Train Acc=1.0000, Val Acc=0.9831
+Epoch 28/40 | Train Loss=0.0110, Val Loss=0.0171 | Train Acc=1.0000, Val Acc=1.0000
+Epoch 29/40 | Train Loss=0.0139, Val Loss=0.0218 | Train Acc=0.9962, Val Acc=0.9831
+Epoch 30/40 | Train Loss=0.0064, Val Loss=0.0229 | Train Acc=1.0000, Val Acc=0.9831
+Early stopping triggered!
+
+========== Evaluating Best Transformer Model ==========
+
+              precision    recall  f1-score   support
+
+       clear       1.00      1.00      1.00        14
+       drive       1.00      1.00      1.00        14
+        lift       1.00      1.00      1.00        15
+       smash       1.00      1.00      1.00        16
+
+    accuracy                           1.00        59
+   macro avg       1.00      1.00      1.00        59
+weighted avg       1.00      1.00      1.00        59
+
+===============================================================================================
+Layer (type:depth-idx)                        Output Shape              Param #
+===============================================================================================
+TransformerShotClassifier                     [1, 4]                    --
+├─Linear: 1-1                                 [1, 20, 64]               640
+├─PositionalEncodingLearned: 1-2              [1, 20, 64]               1,280
+├─TransformerEncoder: 1-3                     [1, 20, 64]               --
+│    └─ModuleList: 2-1                        --                        --
+│    │    └─TransformerEncoderLayer: 3-1      [1, 20, 64]               33,472
+│    │    └─TransformerEncoderLayer: 3-2      [1, 20, 64]               33,472
+├─Sequential: 1-4                             [1, 4]                    --
+│    └─Linear: 2-2                            [1, 64]                   4,160
+│    └─ReLU: 2-3                              [1, 64]                   --
+│    └─Dropout: 2-4                           [1, 64]                   --
+│    └─Linear: 2-5                            [1, 4]                    260
+===============================================================================================
+Total params: 73,284
+Trainable params: 73,284
+Non-trainable params: 0
+Total mult-adds (M): 0.04
+===============================================================================================
+Input size (MB): 0.00
+Forward/backward pass size (MB): 0.12
+Params size (MB): 0.16
+Estimated Total Size (MB): 0.28
+===============================================================================================
+
+========== Training Complete ==========
+
+
+Process finished with exit code 0
+
