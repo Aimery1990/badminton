@@ -88,8 +88,6 @@ class TransformerShotClassifier(nn.Module):
 
 class TransformerTrainer:
     def __init__(self):
-        # self.df_train = pd.read_csv("./combined_final_features/final_combined_training_e2e.csv")# TODO
-        # self.df_test = pd.read_csv("./combined_final_features/final_combined_validation_e2e.csv")# TODO
 
         train_win, train_lab, test_win, test_lab = run_data_processing_transformer()
 

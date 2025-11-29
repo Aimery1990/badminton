@@ -104,3 +104,53 @@ plt.title(f'Confusion Matrix for MLP ({len(class_names)} Classes)')
 plt.ylabel('True Label')
 plt.xlabel('Predicted Label')
 plt.show()
+
+def plot_training_curves(history):
+    """Plot loss and accuracy curves for Keras model training."""
+
+    train_loss = history.history.get("loss", [])
+    val_loss = history.history.get("val_loss", [])
+
+    # Different Keras configs use different accuracy keys
+    if "accuracy" in history.history:
+        train_acc = history.history["accuracy"]
+        val_acc = history.history.get("val_accuracy", [])
+    elif "categorical_accuracy" in history.history:
+        train_acc = history.history["categorical_accuracy"]
+        val_acc = history.history.get("val_categorical_accuracy", [])
+    elif "sparse_categorical_accuracy" in history.history:
+        train_acc = history.history["sparse_categorical_accuracy"]
+        val_acc = history.history.get("val_sparse_categorical_accuracy", [])
+    else:
+        raise KeyError(
+            f"No accuracy key found in history.history: {list(history.history.keys())}"
+        )
+
+    epochs = range(1, len(train_loss) + 1)
+
+    plt.figure(figsize=(12, 5))
+
+    # Loss curve
+    plt.subplot(1, 2, 1)
+    plt.plot(epochs, train_loss, label="Train Loss")
+    if val_loss:
+        plt.plot(epochs, val_loss, label="Validation Loss")
+    plt.title("Loss Curve")
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.legend()
+
+    # Accuracy curve
+    plt.subplot(1, 2, 2)
+    plt.plot(epochs, train_acc, label="Train Acc")
+    if val_acc:
+        plt.plot(epochs, val_acc, label="Validation Acc")
+    plt.title("Accuracy Curve")
+    plt.xlabel("Epoch")
+    plt.ylabel("Accuracy")
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
+
+plot_training_curves(history)
