@@ -43,7 +43,7 @@ print(f"Detected Classes: {class_names}")
 input_dim = X_train.shape[1]
 output_dim = y_train_one_hot.shape[1]
 
-print(f"Input Features: {input_dim}, Output Classes: {output_dim}")
+print(f"Input Features: {input_dim}, Output Classes: {output_dim}, Output Dimension: {output_dim}")
 
 model = Sequential([
     # Layer 1: 128 neurons, ReLU activation, Dropout
