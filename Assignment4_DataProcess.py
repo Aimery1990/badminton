@@ -115,7 +115,7 @@ def vector_magnitude(window, idxs):
 
 
 def corr_safe(a, b):
-    # 若任一軸恆定，視為沒相關，返回0
+    # if any constant returns 0
     if np.std(a) == 0 or np.std(b) == 0:
         return 0
     return np.corrcoef(a, b)[0, 1]
@@ -153,7 +153,7 @@ class FeatureExtractor:
         return stats
 
     def resultant_features(self, window):
-        # 假設sensor順序分別是（X, Y, Z）,如accel_X, accel_Y, accel_Z
+
         out = {}
         group_indices = {
             'a': [0, 1, 2], 'g': [3, 4, 5], 'm': [6, 7, 8]
@@ -190,13 +190,13 @@ class FeatureExtractor:
 
         for key, idxs in {'a': [0, 1, 2], 'g': [3, 4, 5]}.items():
             sig = vector_magnitude(window, idxs)
-            # Remove DC分量
+            # Remove DC
             sig_zm = sig - np.mean(sig)
-            # 計算實FFT(只返回正頻)
+            # Real FFT
             fft_vals = np.abs(rfft(sig_zm))
             fft_freqs = rfftfreq(N, d=1 / sampling_freq)
 
-            # 主導頻率與功率
+            # main frequency
             dom_idx = np.argmax(fft_vals)
             dom_freq = fft_freqs[dom_idx]
             dom_power = fft_vals[dom_idx]
@@ -213,16 +213,12 @@ class FeatureExtractor:
         return feats
 
     def gyro_integration_magnitude(self, window, gyro_idxs=[3, 4, 5], dt=0.1):
-        """
-        window: shape (n_samples, n_features)
-        gyro_idxs: 三個gyroscope欄位的index（如[3,4,5]）
-        dt: 單位時間間隔，假設10Hz則dt=0.1s
-        """
+
         gyro_window = window[:, gyro_idxs]  # [n_samples, 3]
-        # 對每個軸積分（近似：累加值 * dt），然後計算總位移（旋轉模長）
+        # For each axis, integrate (approximately: sum of values × dt), then compute the total displacement (rotation magnitude).
         integral = np.sum(gyro_window, axis=0) * dt
         mag = np.linalg.norm(integral)
-        return mag  # 輸出單個float，代表該窗口總旋轉量
+        return mag  # Outputs a single float representing the total rotation for that window.
 
     def cross_axis_corr(self, window, idxs, sensor_prefix):
         vals = window[:, idxs]
@@ -947,7 +943,7 @@ def run_data_processing_transformer():
             output_dir=OUTPUT_DIR,
             train_file_name=train_name,
             test_file_name=test_name,
-            e2e_pipeline=True     # ⭐重要：走序列数据模式！
+            e2e_pipeline=True     #
         )
 
         all_train_windows.append(train_w)
@@ -955,7 +951,7 @@ def run_data_processing_transformer():
         all_test_windows.append(test_w)
         all_test_labels.append(test_l)
 
-    # ⭐ 合并（按第 0 维拼接）
+    #
     final_train_windows = np.concatenate(all_train_windows, axis=0)
     final_train_labels = np.concatenate(all_train_labels, axis=0)
     final_test_windows = np.concatenate(all_test_windows, axis=0)
